@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in hemingway.gemspec
+# Gem dependencies 
 gemspec
+
+# External dependencies
+gem treetop
+gem polyglot
