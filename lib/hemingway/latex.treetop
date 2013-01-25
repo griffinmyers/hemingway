@@ -1,110 +1,97 @@
-require 'hemingway/tag_for'
+require 'hemingway/build'
 
-grammar Latex
+module Hemingway
+  grammar Latex
 
-  rule document
-    (paragraph)* {
-      def content
-        [:document, elements.map { |e| e.content }]
-      end
+    rule document
+      ( paragraph )* {
+        def html
+          paragraphs = elements
+          Build.tag("div", paragraphs.map { |e| e.html }.join, "document")
+        end
+      }
+    end
 
-      def html
-        Hemingway.tag_for("div", "document", elements.map { |e| e.html }.join)
-      end
-    }
+    # Example: There aren't the \n\n you're looking for \n\n. 
+    # Notes: 
+    #   - Okay so this is interesting. When you reference something with a * or
+    # a +, then you're creating a top level array-like structure that you'll 
+    # have to dig past to get at the list. elements[0] refers to the array of 
+    # tags or texts here. 
+    rule paragraph
+      ( tag )* eop {
+        def html
+          tags = elements[0].elements
+          Build.tag("p", tags.map { |e| e.html }.join)
+        end
+      }
+    end
+
+    # Example: \tag{text} or just text
+    # Notes: 
+    #  - So I can define methods based on the ordered choice in the top
+    #  level of this rule. Text is already its own thing though, so an html
+    #  method need not be defined on it because alas, it already exists as
+    #  defined in the text rule itself!
+    rule tag
+      tag_start tag_type "{" tag "}" {
+          def html
+            Build.tag("span", tag.html, tag_type.text_value)
+          end 
+        } / text
+    end 
+
+    # Example: blah blah blah
+    # Notes: 
+    #  - Okay so this is midly confusing. It's super important to keep the idea
+    # of what text is consumed in mind. If I just have the rule as 
+    #
+    #                          !( tag_start / eop)+ 
+    #
+    # it will never consume any text [because negative lookahead assertions
+    # don't consume text]. When this runs it would just sit on the first
+    # character and continually check for tag_start, causing a deadspin if it
+    # wasn't a tag_start. To fix this, make it a sequence with '.'. The '.' will
+    # consume any input and keep that index moving along until in fact we find
+    # our tag_start.   
+    #  - Okay another super important consideration: I MUST use
+    # the + rather than the *. If I use *, then the empty string will match
+    # text, and because the parent rule of paragraph has zero or more texts in
+    # a sequence, it will forever match the empty string and never move onto
+    # eop. We much only match text when there is one or more characters, a
+    # totally reasonable rule.
+    rule text
+      ( !( tag_start / tag_end / eop ) . )+ {
+        def html
+          text_value
+        end
+      }
+    end
+
+    # End of paragraph. Originally this had a choice for EOF, but I can't
+    # seem to find a good way for Treetop to process that. My workaround
+    # strategy will be to append some newlines onto the end of the input 
+    # string. 
+    rule eop
+      newline 2..
+    end
+
+    rule tag_type
+      "emph" / "texttt"
+    end
+
+    rule newline
+      "\n"
+    end
+
+    # You know, what starts a tag
+    rule tag_start
+      "\\"
+    end
+
+    rule tag_end
+      "}"
+    end
+
   end
-
-  # Example: There aren't the \n\n you're looking for \n\n. 
-  # Notes: 
-  #   - Okay so this is interesting. When you reference something with a * or
-  # a +, then you're creating a top level array-like structure that you'll have 
-  # to dig past to get at the list. elements[0] refers to the array of tags 
-  # or texts here. 
-  rule paragraph
-    ( tag / text )* eop {
-      def content
-        [:paragraph, elements[0].elements.map { |e| e.content } ]
-      end
-
-      def html
-        Hemingway.tag_for("p", "paragraph", elements[0].elements.map { |e| e.html }.join)
-      end
-    }
-  end
-
-  # Example: blah blah blah
-  # Notes: 
-  #   - Okay so this is midly confusing. It's super important to keep the idea
-  # of what text is consumed in mind. If I just have the rule as 
-  # !( tag_start / eop)+ 
-  # it will never consume any text [because negative lookahead assertions don't
-  # consume text]. When this runs it would just sit on the first character
-  # and continually check for newline, causing a deadspin if it wasn't a 
-  # newline. To fix this, make it a sequence with '.'. The '.' will consume
-  # any input and keep that index moving along until in fact we find our 
-  # newline. 
-  #  - Okay another super important consideration: I MUST use the + rather than
-  # the *. If I use *, then the empty string will match text, and because the 
-  # parent rule of paragraph has zero or more texts in a sequence, it will
-  # forever match the empty string and never move onto eop. We much only
-  # match text when there is one or more characters, a totally reasonable 
-  # rule. 
-  rule text
-    ( !( tag_start / eop) . )+ {
-      def content
-        [:text, text_value ]
-      end
-
-      def html
-        text_value
-      end
-    }
-  end
-
-  # Example: \tag{inner_text}
-  rule tag
-    tag_start tag_type "{" inner_text "}" {
-      def content
-        [tag_type, inner_text.content]
-      end
-
-      def html
-        Hemingway.tag_for("span", tag_type.text_value, inner_text.html)
-      end
-    }
-  end 
-
-  # Example: \emph{inner_text}
-  rule inner_text
-    ( !'}' . )* {
-      def content
-        [:inner_text, text_value]
-      end
-
-      def html
-        text_value
-      end
-    }
-  end
-  # End of paragraph. Originally this had a choice for EOF, but I can't
-  # seem to find a good way for Treetop to process that. My workaround
-  # strategy will be to append some newlines onto the end of the input 
-  # string. 
-  rule eop
-    newline 2..
-  end
-
-  rule tag_type
-    "emph" / "texttt"
-  end
-
-  rule newline
-    "\n"
-  end
-
-  # You know, what starts a tag
-  rule tag_start
-    "\\"
-  end
-
 end

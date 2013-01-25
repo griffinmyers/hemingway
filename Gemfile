@@ -4,5 +4,11 @@ source 'https://rubygems.org'
 gemspec
 
 # External dependencies
-gem treetop
-gem polyglot
+gem "treetop"
+gem "polyglot"
+
+group :test do
+  gem "rspec"
+  gem "pry"
+  gem "pry-debugger"
+end

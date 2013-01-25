@@ -1,6 +1,4 @@
-require "treetop"
-require "polyglot"
-require "hemingway/latex.treetop"
+require "hemingway/parser"
 require 'pry-debugger'
 
 module Hemingway
@@ -13,7 +11,7 @@ module Hemingway
       end
     end
 
-    parser = LatexParser.new
+    parser = Parser.new
     p = parser.parse(source)
     binding.pry
     p.html
