@@ -7,8 +7,11 @@ gemspec
 gem "treetop"
 gem "polyglot"
 
+group :development do
+  gem "pry-debugger"
+  gem "pry"
+end
+
 group :test do
   gem "rspec"
-  gem "pry"
-  gem "pry-debugger"
 end
