@@ -1,6 +1,8 @@
 # Hemingway
 
-Hemingway can translate a very rigid subset of LaTeX commands into HTML markup that can then be styled at the user's whim. 
+Hemingway can translate a very rigid subset of LaTeX commands into HTML markup that can then be styled at the user's whim.
+
+[![Build Status](https://travis-ci.org/griffinmyers/hemingway.png?branch=master)](https://travis-ci.org/griffinmyers/hemingway)
 
 ## Installation
 
