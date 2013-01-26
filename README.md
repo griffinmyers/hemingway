@@ -36,7 +36,7 @@ If something goes really wrong, the parse method will return `nil`. If that's th
 
     parser.failure_reason
     
-to figure out what happened. `Hemingway::Parser` is a delagator for a Treetop parser, so check out the [Treetop Documentation](http://treetop.rubyforge.org/syntactic_recognition.html) to see what other useful methods you can use in case of something going wrong. 
+to figure out what happened. `Hemingway::Parser` is a delegator for a Treetop parser, so check out the [Treetop Documentation](http://treetop.rubyforge.org/syntactic_recognition.html) to see what other useful methods you can use in case of something going wrong. 
 
 ## Supported Syntax
 Here is a breakdown of supported latex and its markup equivalent. 
@@ -45,7 +45,7 @@ top level, everything is wrapped in
 
     <div class='document'></div>
     
-but I'm ommiting that detail from the examples for brevity. Throughout this, 
+but I'm omitting that detail from the examples for brevity. Throughout this, 
 the `:` operator simply says the LHS maps to the RHS. 
 
 ###### Newlines
