@@ -79,7 +79,7 @@ module Hemingway
 
     end
 
-    describe "math" do
+    describe "#math" do
       it 'should parse out a math symbol' do
         html = @parser.parse("$\\Delta$").html
         html.should == "<div class='document'><p>&Delta;</p></div>"

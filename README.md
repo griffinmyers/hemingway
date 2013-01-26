@@ -1,8 +1,8 @@
 # Hemingway
 
-Hemingway can translate a very rigid subset of LaTeX commands into HTML markup that can then be styled at the user's whim.
+Hemingway can translate a very rigid subset of LaTeX commands into HTML markup that can then be styled at the user's whim. 
 
-[![Build Status](https://travis-ci.org/griffinmyers/hemingway.png?branch=master)](https://travis-ci.org/griffinmyers/hemingway)
+The parser was created using Treetop, so it might be useful to consult the [Treetop Documentation](http://treetop.rubyforge.org/syntactic_recognition.html) to learn more about the inner workings. 
 
 ## Installation
 
@@ -26,22 +26,51 @@ First, instantiate the parser.
 
 Next, chuck some Latex markup into it. 
 
-    result = parser.parse("\\emph{hey}")
+    result = parser.parse("do, or do not, there is no \\emph{try}")
 
 Finally, convert the result to html markup. 
 
     markup = result.html
+    
+If something goes really wrong, the parse method will return `nil`. If that's the case, you can say something like
 
-#### Supported Syntax
+    parser.failure_reason
+    
+to figure out what happened. `Hemingway::Parser` is a delagator for a Treetop parser, so check out the [Treetop Documentation](http://treetop.rubyforge.org/syntactic_recognition.html) to see what other useful methods you can use in case of something going wrong. 
+
+## Supported Syntax
+Here is a breakdown of supported latex and its markup equivalent. 
+In most examples, I only show the interesting bits of conversion. Note that at the
+top level, everything is wrapped in 
+
+    <div class='document'></div>
+    
+but I'm ommiting that detail from the examples for brevity. Throughout this, 
+the `:` operator simply says the LHS maps to the RHS. 
 
 ###### Newlines
 
 Delimits paragraphs
 
-    "wookie\n\nbreakfast" ==> <p>wookie></p><p>breakfast</p>
+    wookie\n\nbreakfast : <p>wookie></p><p>breakfast</p>
 
+###### Tags
 
+Adds inline styling
 
+    That’s no moon, \emph{it’s a space station.} : That’s no moon, <em>it’s a space station.</em>
+
+    \textbf{The Force} : <strong>The Force</strong>
+    
+    \texttt{R2-D2} : <code>R2-D2</code>
+    
+    \textsc{Death Star} : <span class='textsc'>Death Star</span>
+
+####### Maths
+
+Adds math symbols
+
+    \Delta : &Delta;
 
 ## Contributing
 
@@ -50,3 +79,6 @@ Delimits paragraphs
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+---
+[![Build Status](https://travis-ci.org/griffinmyers/hemingway.png?branch=master)](https://travis-ci.org/griffinmyers/hemingway)
