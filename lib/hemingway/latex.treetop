@@ -38,8 +38,26 @@ module Hemingway
           def html
             tag_type.html(tag.html)
           end 
-        } / text
+        } / math / text
+        
     end 
+
+    # Example: $ \Pi = 3.14159 $
+    rule math
+      math_start symbol math_end {
+        def html
+          symbol.html
+        end
+      }
+    end
+
+    rule symbol
+      "\\Delta" {
+        def html
+          "&Delta;"
+        end
+      }
+    end
 
     # Example: blah blah blah
     # Notes: 
@@ -61,7 +79,7 @@ module Hemingway
     # eop. We much only match text when there is one or more characters, a
     # totally reasonable rule.
     rule text
-      ( !( tag_start / tag_end / eop ) . )+ {
+      ( !( tag_start / tag_end / math_start / eop ) . )+ {
         def html
           text_value
         end
@@ -85,17 +103,17 @@ module Hemingway
             Build.tag("em", content)
           end
         } / 
-        "texttt" {
+      "texttt" {
           def html(content)
             Build.tag("code", content)
           end
         } / 
-        "textbf" {
+      "textbf" {
           def html(content)
             Build.tag("strong", content)
           end
         } /
-        "textsc" {
+      "textsc" {
           def html(content)
             Build.tag("span", content, "textsc")
           end
@@ -106,13 +124,20 @@ module Hemingway
       "\n"
     end
 
-    # You know, what starts a tag
     rule tag_start
       "\\"
     end
 
     rule tag_end
       "}"
+    end
+
+    rule math_start
+      "$"
+    end
+
+    rule math_end
+      math_start
     end
 
   end
