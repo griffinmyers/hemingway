@@ -19,28 +19,31 @@ module Hemingway
     # have to dig past to get at the list. elements[0] refers to the array of 
     # tags or texts here. 
     rule paragraph
-      ( tag )* eop {
+      ( content )* eop {
         def html
-          tags = elements[0].elements
-          Build.tag("p", tags.map { |e| e.html }.join)
+          constituents = elements[0].elements
+          Build.tag("p", constituents.map { |c| c.html }.join)
         end
       }
     end
 
-    # Example: \tag{text} or just text
+    # Example: \tag{text} or just text or $\Delta$
     # Notes: 
     #  - So I can define methods based on the ordered choice in the top
     #  level of this rule. Text is already its own thing though, so an html
     #  method need not be defined on it because alas, it already exists as
     #  defined in the text rule itself!
-    rule tag
-      tag_start tag_type "{" tag "}" {
-          def html
-            tag_type.html(tag.html)
-          end 
-        } / math / text
-        
+    rule content
+      tag / math / text
     end 
+
+    rule tag
+      tag_start tag_type "{" content "}" {
+        def html
+          tag_type.html(content.html)
+        end 
+      }
+    end
 
     # Example: $ \Pi = 3.14159 $
     rule math
