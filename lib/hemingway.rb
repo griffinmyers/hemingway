@@ -13,7 +13,6 @@ module Hemingway
 
     parser = Parser.new
     p = parser.parse(source)
-    binding.pry
     p.html
   end
 

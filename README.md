@@ -20,7 +20,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+First, instantiate the parser. 
+
+    parser = Hemingway::Parser.new
+
+Next, chuck some Latex markup into it. 
+
+    result = parser.parse("\\emph{hey}")
+
+Finally, convert the result to html markup. 
+
+    markup = result.html
+
+#### Supported Syntax
+
+###### Newlines
+
+Delimits paragraphs
+
+    "wookie\n\nbreakfast" ==> <p>wookie></p><p>breakfast</p>
+
+
+
 
 ## Contributing
 
