@@ -15,17 +15,16 @@ module Hemingway
       }
     end
 
-    # Example: There aren't the \n\n you're looking for \n\n. 
+    # Example: These aren't the \n\n droids you're looking for \n\n. 
     # Notes: 
     #   - Okay so this is interesting. When you reference something with a * or
     # a +, then you're creating a top level array-like structure that you'll 
     # have to dig past to get at the list. elements[0] refers to the array of 
     # tags or texts here. 
     rule paragraph
-      ( content )* eop {
+      sequence:( content )* eop {
         def html
-          constituents = elements[0].elements
-          Build.tag("p", constituents.map { |c| c.html }.join)
+          Build.tag("p", sequence.elements.map { |c| c.html }.join)
         end
       }
     end
@@ -41,10 +40,9 @@ module Hemingway
     end 
 
     rule tag
-      tag_start tag_type "{" ( content )* "}" {
+      tag_start tag_type "{" sequence:( content )* "}" {
         def html
-          constituents = elements[3].elements
-          tag_type.html(constituents.map { |c| c.html }.join)
+          tag_type.html(sequence.elements.map { |c| c.html }.join)
         end 
       }
     end
@@ -58,6 +56,11 @@ module Hemingway
       }
     end
 
+    # Example : \Pi
+    # Notes: 
+    #  - Once again, math_symbol need not have an html method defined on it. 
+    #  When .html is called on symbol, it knows the match is actually a 
+    #  math_symbol, so that is what symbol.html is actually calling. 
     rule symbol
       math_symbol
     end
@@ -92,9 +95,9 @@ module Hemingway
     # Special characters that need to be escaped in Latex. 
     # Example: War \& Peace
     rule special
-      escape ( "#" / "$" / "%" / "&" / "_" ) {
+      escape character:( "#" / "$" / "%" / "&" / "_" ) {
         def html
-          elements[1].text_value
+          character.text_value
         end
       }
     end
