@@ -1,5 +1,3 @@
-require 'Hemingway/build'
-
 module Hemingway
   grammar Symbols
 
