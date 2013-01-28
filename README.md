@@ -66,11 +66,20 @@ Adds inline styling
     
     \textsc{Death Star} : <span class='textsc'>Death Star</span>
 
-####### Maths
+###### Maths
 
 Adds math symbols
 
-    \Delta : &Delta;
+    $\Delta$ : &Delta;
+
+
+###### Special Characters
+
+    \# : # 
+    \$ : $ 
+    \% : % 
+    \& : & 
+    \_ : _
 
 ## Contributing
 
