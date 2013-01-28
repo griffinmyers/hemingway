@@ -35,8 +35,23 @@ module Hemingway
         html.should == "<div class='document'><p></p></div>"
       end
 
-      it 'should blow up with an empty tag' do
-        html = @parser.parse("\\emph{}").should be_false
+      it 'should be cool with an empty tag' do
+        html = @parser.parse("\\emph{}").html
+        html.should == "<div class='document'><p><em></em></p></div>"
+      end
+
+    end
+
+    describe "#special" do
+
+      it 'should escape a special character' do
+        html = @parser.parse("War \\& Peace").html
+        html.should == "<div class='document'><p>War & Peace</p></div>"
+      end
+
+      it 'should allow for special chars and tags in sequence' do
+        html = @parser.parse("War \\& Peace \\textbf{Tolstoy} \\#").html
+        html.should == "<div class='document'><p>War & Peace <strong>Tolstoy</strong> #</p></div>"
       end
 
     end
@@ -44,8 +59,8 @@ module Hemingway
     describe "#tag" do
 
       it 'should parse an emph tag' do
-        html = @parser.parse("\\emph{hey}").html 
-        html.should == "<div class='document'><p><em>hey</em></p></div>"
+        html = @parser.parse("a \\emph{hey} b").html 
+        html.should == "<div class='document'><p>a <em>hey</em> b</p></div>"
       end
 
       it 'should parse a texttt tag' do
@@ -63,6 +78,11 @@ module Hemingway
         html.should == "<div class='document'><p><span class='textsc'>hey</span></p></div>"
       end
 
+      it 'should allow sequences of content within a tag' do
+        html = @parser.parse("\\textsc{hey \\emph{vibes} \& times}").html 
+        html.should == "<div class='document'><p><span class='textsc'>hey <em>vibes</em> & times</span></p></div>"
+      end
+
     end
 
     describe "#nesting" do
@@ -77,6 +97,10 @@ module Hemingway
         html.should == "<div class='document'><p><em><code><code>hey</code></code></em></p></div>"
       end
 
+      it 'should escape special characters in a tag' do
+        html = @parser.parse("\\emph{War \\& Peace}").html
+        html.should == "<div class='document'><p><em>War & Peace</em></p></div>"
+      end
     end
 
     describe "#math" do

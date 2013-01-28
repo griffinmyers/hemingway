@@ -34,13 +34,14 @@ module Hemingway
     #  method need not be defined on it because alas, it already exists as
     #  defined in the text rule itself!
     rule content
-      tag / math / text
+      special / tag / math / text
     end 
 
     rule tag
-      tag_start tag_type "{" content "}" {
+      tag_start tag_type "{" ( content )* "}" {
         def html
-          tag_type.html(content.html)
+          constituents = elements[3].elements
+          tag_type.html(constituents.map { |c| c.html }.join)
         end 
       }
     end
@@ -57,7 +58,7 @@ module Hemingway
     rule symbol
       "\\Delta" {
         def html
-          "&Delta;"
+          Build.symbol(text_value)
         end
       }
     end
@@ -82,9 +83,17 @@ module Hemingway
     # eop. We much only match text when there is one or more characters, a
     # totally reasonable rule.
     rule text
-      ( !( tag_start / tag_end / math_start / eop ) . )+ {
+      ( !( escape / tag_start / tag_end / math_start / eop ) . )+ {
         def html
           text_value
+        end
+      }
+    end
+
+    rule special
+      escape ( "#" / "$" / "%" / "&" / "_" ) {
+        def html
+          elements[1].text_value
         end
       }
     end
@@ -128,6 +137,10 @@ module Hemingway
     end
 
     rule tag_start
+      "\\"
+    end
+
+    rule escape
       "\\"
     end
 
