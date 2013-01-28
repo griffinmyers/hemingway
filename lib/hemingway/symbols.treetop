@@ -1,0 +1,51 @@
+require 'Hemingway/build'
+
+module Hemingway
+  grammar Symbols
+
+    rule math_symbol
+      (
+        "\\Gamma" /
+        "\\Delta" /
+        "\\Theta" /
+        "\\Lambda" /
+        "\\Xi" /
+        "\\Pi" /
+        "\\Sigma" /
+        "\\Upsilon" /
+        "\\Phi" /
+        "\\Psi" /
+        "\\Omega" /
+        "\\alpha" /
+        "\\beta" /
+        "\\gamma" /
+        "\\delta" /
+        "\\epsilon" /
+        "\\zeta" /
+        "\\eta" /
+        "\\theta" /
+        "\\iota" /
+        "\\kappa" /
+        "\\lambda" /
+        "\\mu" /
+        "\\nu" /
+        "\\xi" /
+        "\\pi" /
+        "\\rho" /
+        "\\varsigma" /
+        "\\sigma" /
+        "\\tau" /
+        "\\upsilon" /
+        "\\phi" /
+        "\\chi" /
+        "\\psi" /
+        "\\omega"
+      ) {
+        def html
+          Build.symbol(text_value)
+        end
+      }
+    end
+
+  end
+end

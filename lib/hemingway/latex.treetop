@@ -1,7 +1,10 @@
 require 'hemingway/build'
+require "hemingway/symbols.treetop"
 
 module Hemingway
   grammar Latex
+
+    include Symbols
 
     rule document
       ( paragraph )* {
@@ -56,11 +59,7 @@ module Hemingway
     end
 
     rule symbol
-      "\\Delta" {
-        def html
-          Build.symbol(text_value)
-        end
-      }
+      math_symbol
     end
 
     # Example: blah blah blah
@@ -90,6 +89,8 @@ module Hemingway
       }
     end
 
+    # Special characters that need to be escaped in Latex. 
+    # Example: War \& Peace
     rule special
       escape ( "#" / "$" / "%" / "&" / "_" ) {
         def html
