@@ -64,34 +64,42 @@ the `:` operator simply says the LHS maps to the RHS.
 
 Delimits paragraphs
 
-    wookie\n\nbreakfast : <p>wookie></p><p>breakfast</p>
+```html
+wookie\n\nbreakfast : <p>wookie></p><p>breakfast</p>
+```
 
 ###### Tags
 
 Adds inline styling
 
-    That’s no moon, \emph{it’s a space station.} : That’s no moon, <em>it’s a space station.</em>
+```html
+That’s no moon, \emph{it’s a space station.} : That’s no moon, <em>it’s a space station.</em>
 
-    \textbf{The Force} : <strong>The Force</strong>
+\textbf{The Force} : <strong>The Force</strong>
     
-    \texttt{R2-D2} : <code>R2-D2</code>
+\texttt{R2-D2} : <code>R2-D2</code>
     
-    \textsc{Death Star} : <span class='textsc'>Death Star</span>
+\textsc{Death Star} : <span class='textsc'>Death Star</span>
+```
 
 ###### Maths
 
 Adds math symbols
 
-    $\Delta$ : &Delta;
+```html
+$\Delta$ : &Delta;
+```
 
 
 ###### Special Characters
 
-    \# : # 
-    \$ : $ 
-    \% : % 
-    \& : & 
-    \_ : _
+```html
+\# : # 
+\$ : $ 
+\% : % 
+\& : & 
+\_ : _
+```
 
 ## Contributing
 
