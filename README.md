@@ -8,7 +8,9 @@ The parser was created using Treetop, so it might be useful to consult the [Tree
 
 Add this line to your application's Gemfile:
 
-    gem 'hemingway'
+```ruby
+gem 'hemingway'
+```
 
 And then execute:
 
@@ -22,20 +24,28 @@ Or install it yourself as:
 
 First, instantiate the parser. 
 
-    parser = Hemingway::Parser.new
+```ruby
+parser = Hemingway::Parser.new
+```
 
 Next, chuck some Latex markup into it. 
 
-    result = parser.parse("do, or do not, there is no \\emph{try}")
+```ruby
+result = parser.parse("do, or do not, there is no \\emph{try}")
+```
 
 Finally, convert the result to html markup. 
 
-    markup = result.html
-    
+```ruby
+markup = result.html
+```
+
 If something goes really wrong, the parse method will return `nil`. If that's the case, you can say something like
 
-    parser.failure_reason
-    
+```ruby
+parser.failure_reason
+```
+
 to figure out what happened. `Hemingway::Parser` is a delegator for a Treetop parser, so check out the [Treetop Documentation](http://treetop.rubyforge.org/syntactic_recognition.html) to see what other useful methods you can use in case of something going wrong. 
 
 ## Supported Syntax
@@ -43,8 +53,10 @@ Here is a breakdown of supported latex and its markup equivalent.
 In most examples, I only show the interesting bits of conversion. Note that at the
 top level, everything is wrapped in 
 
-    <div class='document'></div>
-    
+```html
+<div class='document'></div>
+```    
+
 but I'm omitting that detail from the examples for brevity. Throughout this, 
 the `:` operator simply says the LHS maps to the RHS. 
 
