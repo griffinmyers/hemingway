@@ -1,10 +1,18 @@
 require 'hemingway/build'
-require "hemingway/symbols.treetop"
+require "hemingway/special/special.treetop"
+require "hemingway/tag/tag.treetop"
+require "hemingway/math/math.treetop"
+require "hemingway/text/text.treetop"
+require "hemingway/block/block.treetop"
 
 module Hemingway
   grammar Latex
 
-    include Symbols
+    include Special
+    include Tag
+    include Math
+    include Text
+    include Block
 
     rule document
       ( paragraph )* {
@@ -36,71 +44,8 @@ module Hemingway
     #  method need not be defined on it because alas, it already exists as
     #  defined in the text rule itself!
     rule content
-      special / tag / math / text
+      special / tag / block / math / text
     end 
-
-    rule tag
-      tag_start tag_type "{" sequence:( content )* "}" {
-        def html
-          tag_type.html(sequence.elements.map { |c| c.html }.join)
-        end 
-      }
-    end
-
-    # Example: $ \Pi = 3.14159 $
-    rule math
-      math_start symbol math_end {
-        def html
-          symbol.html
-        end
-      }
-    end
-
-    # Example : \Pi
-    # Notes: 
-    #  - Once again, math_symbol need not have an html method defined on it. 
-    #  When .html is called on symbol, it knows the match is actually a 
-    #  math_symbol, so that is what symbol.html is actually calling. 
-    rule symbol
-      math_symbol
-    end
-
-    # Example: blah blah blah
-    # Notes: 
-    #  - Okay so this is midly confusing. It's super important to keep the idea
-    # of what text is consumed in mind. If I just have the rule as 
-    #
-    #                          !( tag_start / eop)+ 
-    #
-    # it will never consume any text [because negative lookahead assertions
-    # don't consume text]. When this runs it would just sit on the first
-    # character and continually check for tag_start, causing a deadspin if it
-    # wasn't a tag_start. To fix this, make it a sequence with '.'. The '.' will
-    # consume any input and keep that index moving along until in fact we find
-    # our tag_start.   
-    #  - Okay another super important consideration: I MUST use
-    # the + rather than the *. If I use *, then the empty string will match
-    # text, and because the parent rule of paragraph has zero or more texts in
-    # a sequence, it will forever match the empty string and never move onto
-    # eop. We much only match text when there is one or more characters, a
-    # totally reasonable rule.
-    rule text
-      ( !( escape / tag_start / tag_end / math_start / eop ) . )+ {
-        def html
-          text_value
-        end
-      }
-    end
-
-    # Special characters that need to be escaped in Latex. 
-    # Example: War \& Peace
-    rule special
-      escape character:( "#" / "$" / "%" / "&" / "_" ) {
-        def html
-          character.text_value
-        end
-      }
-    end
 
     # End of paragraph. Originally this had a choice for EOF, but I can't
     # seem to find a good way for Treetop to process that. My workaround
@@ -110,54 +55,8 @@ module Hemingway
       newline 2..
     end
 
-    # All tag types will be responsible with implementing their own
-    # html methods. This is because emph should map to a <em> tag, 
-    # textbf should map to a <strong> tag, and so forth. 
-    rule tag_type
-      "emph" {
-          def html(content)
-            Build.tag("em", content)
-          end
-        } / 
-      "texttt" {
-          def html(content)
-            Build.tag("code", content)
-          end
-        } / 
-      "textbf" {
-          def html(content)
-            Build.tag("strong", content)
-          end
-        } /
-      "textsc" {
-          def html(content)
-            Build.tag("span", content, "textsc")
-          end
-        }
-    end
-
     rule newline
       "\n"
-    end
-
-    rule tag_start
-      "\\"
-    end
-
-    rule escape
-      "\\"
-    end
-
-    rule tag_end
-      "}"
-    end
-
-    rule math_start
-      "$"
-    end
-
-    rule math_end
-      math_start
     end
 
   end

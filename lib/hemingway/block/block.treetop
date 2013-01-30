@@ -1,0 +1,26 @@
+module Hemingway
+  grammar Block
+
+    # Example: 
+    #   \begin{itemize}
+    #   \item[Chewbacca] Wookie 
+    #   \item[Han] Smuggler
+    #   \item[Anakin] Savant  
+    #   \end{itemize}
+    # Notes: 
+    #  - I need to ensure that the rule only matches when the begining 
+    #    and ending types match (i.e. itemize) 
+    rule block
+      block_end
+    end
+
+    rule block_start
+      "\\begin{"
+    end
+
+    rule block_end
+      "\\end{"
+    end
+
+  end
+end
