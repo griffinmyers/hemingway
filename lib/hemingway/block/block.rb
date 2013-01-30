@@ -1,11 +1,7 @@
 module Hemingway
-
-  module BlockNode
-
+  module ItemizeBlockNode
     def html
-
+      ""
     end
-
   end
-
 end

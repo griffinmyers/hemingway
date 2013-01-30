@@ -21,9 +21,21 @@ module Hemingway
     # text, and because the parent rule of paragraph has zero or more texts in
     # a sequence, it will forever match the empty string and never move onto
     # eop. We much only match text when there is one or more characters, a
-    # totally reasonable rule.
+    # totally reasonable rule. 
     rule text
-      ( !( escape / tag_start / tag_end / math_start / eop ) . )+ <TextNode>
+      ( !non_text . )+ <TextNode>
+    end
+
+    # Example: \item[label_text]
+    # This totally sucks, but I need to escape a special character when
+    # I have text that resides within an item label. Oof.
+    rule label_text
+      ( !( non_text / label_end ) . )+ <TextNode>
+    end
+
+    # If you hit any of these while chomping on text you should pop out
+    rule non_text
+      escape / tag_start / tag_end / math_start / eop
     end
 
   end

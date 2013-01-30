@@ -27,7 +27,7 @@ module Hemingway
     def pad(input)
       input + "\n\n"
     end
-
+    
   end
 
 end
