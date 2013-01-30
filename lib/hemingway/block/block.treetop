@@ -1,3 +1,5 @@
+require "hemingway/block/block"
+
 module Hemingway
   grammar Block
 
@@ -9,9 +11,9 @@ module Hemingway
     #   \end{itemize}
     # Notes: 
     #  - I need to ensure that the rule only matches when the begining 
-    #    and ending types match (i.e. itemize) 
+    #    and ending types match (i.e. itemize). Maybe a semantic predicate?
     rule block
-      block_end
+      block_end <BlockNode>
     end
 
     rule block_start

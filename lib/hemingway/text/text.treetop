@@ -1,3 +1,5 @@
+require "hemingway/text/text"
+
 module Hemingway
   grammar Text
 
@@ -21,11 +23,7 @@ module Hemingway
     # eop. We much only match text when there is one or more characters, a
     # totally reasonable rule.
     rule text
-      ( !( escape / tag_start / tag_end / math_start / eop ) . )+ {
-        def html
-          text_value
-        end
-      }
+      ( !( escape / tag_start / tag_end / math_start / eop ) . )+ <TextNode>
     end
 
   end

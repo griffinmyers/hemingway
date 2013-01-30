@@ -1,38 +1,20 @@
+require "hemingway/tag/tag"
+
 module Hemingway
   grammar Tag
 
     rule tag
-      tag_start tag_type "{" sequence:( content )* "}" {
-        def html
-          tag_type.html(sequence.elements.map { |c| c.html }.join)
-        end 
-      }
+      tag_start tag_type "{" sequence:( content )* "}" <TagNode>
     end
 
     # All tag types will be responsible with implementing their own
     # html methods. This is because emph should map to a <em> tag, 
     # textbf should map to a <strong> tag, and so forth. 
     rule tag_type
-      "emph" {
-          def html(content)
-            Build.tag("em", content)
-          end
-        } / 
-      "texttt" {
-          def html(content)
-            Build.tag("code", content)
-          end
-        } / 
-      "textbf" {
-          def html(content)
-            Build.tag("strong", content)
-          end
-        } /
-      "textsc" {
-          def html(content)
-            Build.tag("span", content, "textsc")
-          end
-        }
+      "emph" <EmphTagNode> / 
+      "texttt" <TextttTagNode> / 
+      "textbf" <TextbfTagNode> /
+      "textsc" <TextscTagNode>
     end
 
     rule tag_start

@@ -1,14 +1,12 @@
+require "hemingway/special/special"
+
 module Hemingway
   grammar Special
 
     # Special characters that need to be escaped in Latex. 
     # Example: War \& Peace
     rule special
-      escape character:( "#" / "$" / "%" / "&" / "_" ) {
-        def html
-          character.text_value
-        end
-      }
+      escape character:( "#" / "$" / "%" / "&" / "_" ) <SpecialNode>
     end
 
     rule escape

@@ -1,4 +1,5 @@
 require 'hemingway/build'
+require 'hemingway/latex'
 require "hemingway/special/special.treetop"
 require "hemingway/tag/tag.treetop"
 require "hemingway/math/math.treetop"
@@ -15,12 +16,7 @@ module Hemingway
     include Block
 
     rule document
-      ( paragraph )* {
-        def html
-          paragraphs = elements
-          Build.tag("div", paragraphs.map { |e| e.html }.join, "document")
-        end
-      }
+      ( paragraph )* <DocumentNode>
     end
 
     # Example: These aren't the \n\n droids you're looking for \n\n. 
@@ -30,11 +26,7 @@ module Hemingway
     # have to dig past to get at the list. elements[0] refers to the array of 
     # tags or texts here. 
     rule paragraph
-      sequence:( content )* eop {
-        def html
-          Build.tag("p", sequence.elements.map { |c| c.html }.join)
-        end
-      }
+      sequence:( content )* eop <ParagraphNode>
     end
 
     # Example: \tag{text} or just text or $\Delta$
