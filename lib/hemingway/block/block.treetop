@@ -44,11 +44,11 @@ module Hemingway
     end
 
     rule item
-     "\\item" " "? label? inline_content* newline*
+     "\\item" whitespace label:label? sequence:inline_content* whitespace <ItemNode>
     end
 
     rule label
-      label_start label_content label_end
+      label_start label_content label_end <LabelNode> 
     end
 
     # This is oddly similar to inline_content. We have to use label_text

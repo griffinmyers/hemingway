@@ -39,7 +39,7 @@ module Hemingway
       special / tag / math / text
     end 
 
-    # Treetop does not separate lexing from parsing
+    # Treetop does not separate lexing from parsing. Must consume all input. 
     rule whitespace
       ( " " / newline )*
     end

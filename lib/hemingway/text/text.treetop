@@ -35,7 +35,7 @@ module Hemingway
 
     # If you hit any of these while chomping on text you should pop out
     rule non_text
-      escape / tag_start / tag_end / math_start / eop
+      escape / tag_start / tag_end / math_start / newline
     end
 
   end
