@@ -14,7 +14,7 @@ module Hemingway
 
   module LabelNode
     def html
-      label_content.html
+      sequence.elements.map { |e| e.html }.join
     end
   end
 end

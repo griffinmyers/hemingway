@@ -44,18 +44,18 @@ module Hemingway
     end
 
     rule item
-     "\\item" whitespace label:label? sequence:inline_content* whitespace <ItemNode>
+     "\\item" whitespace label:label? sequence:content* whitespace <ItemNode>
     end
 
     rule label
-      label_start label_content label_end <LabelNode> 
+      label_start sequence:label_content* label_end <LabelNode> 
     end
 
-    # This is oddly similar to inline_content. We have to use label_text
+    # This is oddly similar to content. We have to use label_text
     # instead of text though.. big time bummer.. gotta esacape that label
     # closing bracket. 
     rule label_content
-      special / tag / math / label_text
+      special / tag / block / math / label_text
     end
 
     rule label_start

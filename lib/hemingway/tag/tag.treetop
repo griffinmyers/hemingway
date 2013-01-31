@@ -4,7 +4,7 @@ module Hemingway
   grammar Tag
 
     rule tag
-      tag_start tag_type "{" sequence:( inline_content )* "}" <TagNode>
+      tag_start tag_type "{" sequence:( content )* "}" <TagNode>
     end
 
     # All tag types will be responsible with implementing their own

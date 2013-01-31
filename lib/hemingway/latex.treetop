@@ -26,7 +26,7 @@ module Hemingway
     # have to dig past to get at the list. elements[0] refers to the array of 
     # tags or texts here. 
     rule paragraph
-      sequence:( inline_content / block )* eop <ParagraphNode>
+      sequence:( content )* eop <ParagraphNode>
     end
 
     # Example: \tag{text} or just text or $\Delta$
@@ -35,8 +35,8 @@ module Hemingway
     #  level of this rule. Text is already its own thing though, so an html
     #  method need not be defined on it because alas, it already exists as
     #  defined in the text rule itself!
-    rule inline_content
-      special / tag / math / text
+    rule content
+      special / tag / block / math / text
     end 
 
     # Treetop does not separate lexing from parsing. Must consume all input. 
