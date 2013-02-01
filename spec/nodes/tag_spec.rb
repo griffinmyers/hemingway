@@ -55,7 +55,21 @@ module Hemingway
       end
       
     end
-    
+
+    describe "#vspace" do
+
+      it 'should build vertical space taking divs' do
+        html = @parser.parse("\\vspace{5mm}").html
+        html.should == "<div class='document'><p><div class='vspace5'></div></p></div>"
+      end
+
+      it 'should build vertical space taking divs with double digit heights' do
+        html = @parser.parse("\\vspace{12mm}").html
+        html.should == "<div class='document'><p><div class='vspace12'></div></p></div>"
+      end
+
+    end
+
   end
 
 end

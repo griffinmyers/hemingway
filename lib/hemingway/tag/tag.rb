@@ -5,6 +5,12 @@ module Hemingway
     end 
   end
 
+  module VerticalSpaceTagNode
+    def html
+      Build.tag("div", "", "vspace#{vertical_height.height.text_value}")
+    end
+  end
+
   module EmphTagNode
     def html(content)
       Build.tag("em", content)

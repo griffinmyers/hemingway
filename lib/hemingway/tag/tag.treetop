@@ -5,6 +5,8 @@ module Hemingway
 
     rule tag
       tag_start tag_type "{" sequence:( content )* "}" <TagNode>
+      /
+      tag_start vertical_space "{" vertical_height "}" <VerticalSpaceTagNode>
     end
 
     # All tag types will be responsible with implementing their own
@@ -18,6 +20,23 @@ module Hemingway
       "textbf" <TextbfTagNode> 
       /
       "textsc" <TextscTagNode>
+    end
+
+    # I'm pretty annoyed at having to split this up into a different tag, 
+    # but it is kinda fundamentally different than an inline-style-type tag. 
+    # This tag is supposed to guarantee some vertical spacing, so fine. 
+    # The contents of the tag are now also a measurement of the size of the 
+    # vertical space so, yeah, different. 
+    rule vertical_space
+      "vspace"
+    end
+
+    rule vertical_height
+      height:[0-9]+ millimeter
+    end
+
+    rule millimeter
+      "mm"
     end
 
     rule tag_start
