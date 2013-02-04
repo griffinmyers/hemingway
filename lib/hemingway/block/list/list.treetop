@@ -1,0 +1,44 @@
+require "hemingway/block/list/list"
+
+module Hemingway
+  module Block
+    grammar List
+
+      rule list
+        item+
+      end
+
+      rule list_type      
+        "itemize" <ItemizeListNode>
+        /
+        "enumerate" <EnumerateListNode>
+        /
+        "description" <DescriptionListNode>
+      end
+
+      rule item
+       "\\item" whitespace label:label? sequence:content* whitespace <ItemNode>
+      end
+
+      rule label
+        label_start sequence:label_content* label_end <LabelNode> 
+      end
+
+      # This is oddly similar to content. We have to use label_text
+      # instead of text though.. big time bummer.. gotta esacape that label
+      # closing bracket. 
+      rule label_content
+        special / tag / block / math / label_text
+      end
+
+      rule label_start
+        "["
+      end
+
+      rule label_end
+        "]"
+      end
+
+    end
+  end
+end

@@ -1,7 +1,12 @@
 require "hemingway/block/block"
+require "hemingway/block/list/list.treetop"
+require "hemingway/block/verbatim/verbatim.treetop"
 
 module Hemingway
   grammar Block
+
+    include List
+    include Verbatim
 
     # Example: 
     #   \begin{itemize}
@@ -10,60 +15,30 @@ module Hemingway
     #   \item[Anakin] Savant  
     #   \end{itemize}
     # Notes: 
-    #  - Alright. So I know that the whole idea of a block might be able to be
-    #    generalized better than what I did. Here are my arguments for just
-    #    kinda explicitly declaring each type of block and not being super DRY:
-    #     - Each block is kinda a fundamentally different beast. An itemize
-    #       block has a list of stuff inside of it. A verbatim block just has
-    #       text that should be wrapped in <pre></pre> tags. I'd need some way
-    #       of branch to those different types of content inside the block
-    #       depending on what type of block it is. I can't just have the content
-    #       be an ordered choice because I want to strongly tie the content to 
-    #       block type [i.e. not recognize \item[] within a verbatim, but do 
-    #       recognize it within an itemize]. Splitting this up at the moment
-    #       just seems to most sane way to approach this. Maybe a refactor 
-    #       will make sense. 
+    #  - Definitely a consideration here should be that block_content is in 
+    #    no way enforced by block_type, even though maybe it should be?
+    #    Like- if we're creating a list and we pass it input that is for a 
+    #    \\begin{verbatim} instead the parser won't complain. 
+
     rule block
-      itemize
+      block_start type:block_type "}" whitespace block_content whitespace block_end block_type "}" 
+      &{ |seq| seq[1].text_value == seq[7].text_value } <BlockNode>
     end
 
-    rule itemize
-      itemize_start whitespace itemize_content whitespace itemize_end <ItemizeBlockNode>
+    rule block_type
+      list_type / verbatim_type
     end
 
-    rule itemize_start
-      "\\begin{itemize}"
+    rule block_content
+      list / verbatim
     end
 
-    rule itemize_end
-      "\\end{itemize}"
+    rule block_start
+      "\\begin{"
     end
 
-    rule itemize_content
-      item*
-    end
-
-    rule item
-     "\\item" whitespace label:label? sequence:content* whitespace <ItemNode>
-    end
-
-    rule label
-      label_start sequence:label_content* label_end <LabelNode> 
-    end
-
-    # This is oddly similar to content. We have to use label_text
-    # instead of text though.. big time bummer.. gotta esacape that label
-    # closing bracket. 
-    rule label_content
-      special / tag / block / math / label_text
-    end
-
-    rule label_start
-      "["
-    end
-
-    rule label_end
-      "]"
+    rule block_end
+      "\\end{"
     end
 
   end

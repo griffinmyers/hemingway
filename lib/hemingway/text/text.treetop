@@ -33,6 +33,10 @@ module Hemingway
       ( !( non_text / label_end ) . )+ <TextNode>
     end
 
+    rule verbatim_text
+        ( !escape . )+ <TextNode>
+    end
+
     # If you hit any of these while chomping on text you should pop out
     rule non_text
       escape / tag_start / tag_end / math_start / newline

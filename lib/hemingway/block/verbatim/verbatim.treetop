@@ -1,0 +1,17 @@
+require "hemingway/block/verbatim/verbatim"
+
+module Hemingway
+  module Block
+    grammar Verbatim
+
+      rule verbatim
+        verbatim_text
+      end
+
+      rule verbatim_type
+        "verbatim" <VerbatimNode>
+      end
+
+    end
+  end
+end
