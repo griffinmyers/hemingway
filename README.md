@@ -14,11 +14,11 @@ gem 'hemingway'
 
 And then execute:
 
-    $ bundle
+$ bundle
 
 Or install it yourself as:
 
-    $ gem install hemingway
+$ gem install hemingway
 
 ## Usage
 
@@ -76,10 +76,16 @@ Adds inline styling
 That’s no moon, \emph{it’s a space station.} : That’s no moon, <em>it’s a space station.</em>
 
 \textbf{The Force} : <strong>The Force</strong>
-    
+
 \texttt{R2-D2} : <code>R2-D2</code>
-    
+
 \textsc{Death Star} : <span class='textsc'>Death Star</span>
+```
+
+Or some vertical padding
+
+```html
+\vspace{5mm} : <div class='vspace5'></div>
 ```
 
 ###### Maths
@@ -87,7 +93,41 @@ That’s no moon, \emph{it’s a space station.} : That’s no moon, <em>it’s 
 Adds math symbols
 
 ```html
-$\Delta$ : &Delta;
+$\Gamma$" : &Gamma;
+$\Delta$" : &Delta;
+$\Theta$" : &Theta;
+$\Lambda$" : &Lambda;
+$\Xi$" : &Xi;
+$\Pi$" : &Pi;
+$\Sigma$" : &Sigma;
+$\Upsilon$" : &Upsilon;
+$\Phi$" : &Phi;
+$\Psi$" : &Psi;
+$\Omega$" : &Omega;
+$\alpha$" : &alpha;
+$\beta$" : &beta;
+$\gamma$" : &gamma;
+$\delta$" : &delta;
+$\epsilon$" : &epsilon;
+$\zeta$" : &zeta;
+$\eta$" : &eta;
+$\theta$" : &theta;
+$\iota$" : &iota;
+$\kappa$" : &kappa;
+$\lambda$" : &lambda;
+$\mu$" : &mu;
+$\nu$" : &nu;
+$\xi$" : &xi;
+$\pi$" : &pi;
+$\rho$" : &rho;
+$\varsigma$" : &sigmaf;
+$\sigma$" : &sigma;
+$\tau$" : &tau;
+$\upsilon$" : &upsilon;
+$\phi$" : &phi;
+$\chi$" : &chi;
+$\psi$" : &psi;
+$\omega$" : &omega;
 ```
 
 
@@ -99,6 +139,36 @@ $\Delta$ : &Delta;
 \% : % 
 \& : & 
 \_ : _
+\{ : {  
+\} : } 
+```
+
+###### Blocks
+
+You can make lists with `itemize`, `description`, or `enumerate`. 
+
+```html
+\begin{itemize}\item Wookie \item Jedi \end{itemize} : <ul><li>Wookie </li><li>Jedi </li></ul>
+
+\begin{enumerate} \item Frodo \item Sam \end{enumerate} : <ol><li>Frodo </li><li>Sam </li></ol>
+
+\begin{description} \item Ginger-Nut \item Turkey \end{description} : <dl><dd>Ginger-Nut </dd><dd>Turkey </dd></dl>
+```
+
+Add labels to a list with `\item[label]`: 
+
+```html
+\begin{itemize}\item[bros] before hoes \item \n [chicks] before dicks \end{itemize} : <ul><li><span class='list-label'>bros</span> before hoes </li><li><span class='list-label'>chicks</span> before dicks </li></ul>
+
+\begin{description} \item [Frodo] Intrepid Adventuerer \item [Sam] Faithful Companion \end{description} : <dl><dd><dt>Frodo</dt> Intrepid Adventuerer </dd><dd><dt>Sam</dt> Faithful Companion </dd></dl>
+```
+
+Go ahead, nest lists in all sorts of interesting ways. No reason you couldn't chuck some empahsized text in a label either. 
+
+Enter in preformatted text: 
+
+```html
+\begin{verbatim} don't  we  \n \n all wish \n \n   for a little sleep? \end{verbatim}") : <pre>don't  we  \n \n all wish \n \n   for a little sleep? </pre>
 ```
 
 ## Contributing
