@@ -14,11 +14,11 @@ gem 'hemingway'
 
 And then execute:
 
-$ bundle
+  $ bundle
 
 Or install it yourself as:
 
-$ gem install hemingway
+  $ gem install hemingway
 
 ## Usage
 
