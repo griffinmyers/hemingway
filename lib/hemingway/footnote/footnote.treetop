@@ -1,0 +1,11 @@
+require "hemingway/footnote/footnote"
+
+module Hemingway
+  grammar Footnote
+
+    rule footnote
+      "\\footnote{" sequence:content* "}" <FootnoteNode>
+    end
+
+  end
+end

@@ -20,7 +20,7 @@ module Hemingway
 
   module ItemNode
     def list_html
-      label_tag = label.empty? ? "" : Build.tag("span", label.html, "list-label")
+      label_tag = label.empty? ? "" : Build.tag("span", label.html, :class => "list-label")
       Build.tag("li", label_tag + sequence.elements.map { |e| e.html }.join)
     end
 

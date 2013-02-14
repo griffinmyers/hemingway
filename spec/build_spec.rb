@@ -8,6 +8,8 @@ module Hemingway
       let(:attribute) { "div" }
       let(:content) { "king of the dinos" }
       let(:klass) { "trex" }
+      let(:id) { "tom" }
+      let(:href) { "http://t-bone.org" }
 
       it 'should generate a tag with no content or class' do
         Build.tag(attribute).should == "<#{attribute}></#{attribute}>"
@@ -18,12 +20,28 @@ module Hemingway
       end
 
       it 'should generate a tag with content and a class' do
-        Build.tag(attribute, content, klass) == "<#{attribute} class='#{klass}'>#{content}</#{attribute}>"
+        Build.tag(attribute, content, :class => klass) == "<#{attribute} class='#{klass}'>#{content}</#{attribute}>"
+      end 
+
+      it 'should generate a tag with content and an id' do
+        Build.tag(attribute, content, :id => id) == "<#{attribute} id='#{id}'>#{content}</#{attribute}>"
+      end 
+
+      it 'should generate a tag with content and an href' do
+        Build.tag(attribute, content, :href => href) == "<#{attribute} href='#{href}'>#{content}</#{attribute}>"
+      end 
+
+      it 'should generate a tag with content and an id and a class' do
+        Build.tag(attribute, content, :id => id, :class => klass) == "<#{attribute} id='#{id}' class='#{klass}'>#{content}</#{attribute}>"
+      end 
+
+      it 'should generate a tag with content and an id and a class and an href' do
+        Build.tag(attribute, content, :id => id, :class => klass, :href => href) == "<#{attribute} id='#{id}' class='#{klass}' href='#{href}'>#{content}</#{attribute}>"
       end 
 
       # Can't wait for Ruby 2.0
       it 'should generate a tag with content and a class and no content' do
-        Build.tag(attribute, nil, klass) == "<#{attribute} class='#{klass}'></#{attribute}>"
+        Build.tag(attribute, nil, :class => klass) == "<#{attribute} class='#{klass}'></#{attribute}>"
       end
 
     end

@@ -5,6 +5,7 @@ require "hemingway/tag/tag.treetop"
 require "hemingway/math/math.treetop"
 require "hemingway/text/text.treetop"
 require "hemingway/block/block.treetop"
+require "hemingway/footnote/footnote.treetop"
 
 module Hemingway
   grammar Latex
@@ -14,6 +15,7 @@ module Hemingway
     include Math
     include Text
     include Block
+    include Footnote
 
     rule document
       ( paragraph )* <DocumentNode>
@@ -22,11 +24,11 @@ module Hemingway
     # Example: These aren't the \n\n droids you're looking for \n\n. 
     # Notes: 
     #   - Okay so this is interesting. When you reference something with a * or
-    # a +, then you're creating a top level array-like structure that you'll 
-    # have to dig past to get at the list. elements[0] refers to the array of 
-    # tags or texts here. 
+    #   a +, then you're creating a top level array-like structure that you'll 
+    #   have to dig past to get at the list. elements[0] refers to the array of 
+    #   tags or texts here. 
     rule paragraph
-      sequence:( content )* eop <ParagraphNode>
+      sequence:( content / footnote )* eop <ParagraphNode>
     end
 
     # Example: \tag{text} or just text or $\Delta$

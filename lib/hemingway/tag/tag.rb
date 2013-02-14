@@ -7,7 +7,7 @@ module Hemingway
 
   module VerticalSpaceTagNode
     def html
-      Build.tag("div", "", "vspace#{vertical_height.height.text_value}")
+      Build.tag("div", "", :class => "vspace#{vertical_height.height.text_value}")
     end
   end
 
@@ -31,7 +31,7 @@ module Hemingway
 
   module TextscTagNode
     def html(content)
-      Build.tag("span", content, "textsc")
+      Build.tag("span", content, :class => "textsc")
     end
   end
 end
