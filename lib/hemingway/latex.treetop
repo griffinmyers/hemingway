@@ -18,7 +18,11 @@ module Hemingway
     include Footnote
 
     rule document
-      ( paragraph )* <DocumentNode>
+      entry
+    end
+
+    rule entry
+      ( paragraph )* <EntryNode>
     end
 
     # Example: These aren't the \n\n droids you're looking for \n\n. 
