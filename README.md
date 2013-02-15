@@ -183,7 +183,7 @@ For example this latex markup:
 
 > So we met up with Han and saw his ship, The Millenium Falcon\footnote{a total piece of junk}. I had no idea how that thing was supposed to get us to Alderaan\footnote{location of the \emph{hidden rebel base}}. 
 
-> On board we found homely accomodations including a Dejarik\footnote{much like chess} set that I indluged in with Chewbacca\footnote{Han's carpety first mate}
+> On board we found homely accomodations including a Dejarik\footnote{much like chess} set that I indluged in with Chewbacca\footnote{Han's carpety first mate}.
 
 Renders to this html: 
 
@@ -193,7 +193,7 @@ Renders to this html:
     So we met up with Han and saw his ship, The Millenium Falcon<a href='#footnote1'><span class='inline-footnote-number'><sup>1</sup></span></a>. I had no idea how that thing was supposed to get us to Alderaan<a href='#footnote2'><span class='inline-footnote-number'><sup>2</sup></span></a>. 
   </p>
   <p>
-    On board we found homely accomodations including a Dejarik<a href='#footnote3'><span class='inline-footnote-number'><sup>3</sup></span></a> set that I indluged in with Chewbacca<a href='#footnote4'><span class='inline-footnote-number'><sup>4</sup></span></a>
+    On board we found homely accomodations including a Dejarik<a href='#footnote3'><span class='inline-footnote-number'><sup>3</sup></span></a> set that I indluged in with Chewbacca<a href='#footnote4'><span class='inline-footnote-number'><sup>4</sup></span></a>.
   </p>
 
   <div id='footnote1' class='footnote'>
@@ -211,7 +211,7 @@ Renders to this html:
   <div id='footnote4' class='footnote'>
     <span class='footnote-number'><sup>4</sup></span>Han's carpety first mate
   </div>
-  
+
 </div>
 ```
 
@@ -222,7 +222,7 @@ And looks like this:
     So we met up with Han and saw his ship, The Millenium Falcon<a href='#footnote1'><span class='inline-footnote-number'><sup>1</sup></span></a>. I had no idea how that thing was supposed to get us to Alderaan<a href='#footnote2'><span class='inline-footnote-number'><sup>2</sup></span></a>. 
   </p>
   <p>
-    On board we found homely accomodations including a Dejarik<a href='#footnote3'><span class='inline-footnote-number'><sup>3</sup></span></a> set that I indluged in with Chewbacca<a href='#footnote4'><span class='inline-footnote-number'><sup>4</sup></span></a>
+    On board we found homely accomodations including a Dejarik<a href='#footnote3'><span class='inline-footnote-number'><sup>3</sup></span></a> set that I indluged in with Chewbacca<a href='#footnote4'><span class='inline-footnote-number'><sup>4</sup></span></a>.
   </p>
 
   <div id='footnote1' class='footnote'>
@@ -240,7 +240,7 @@ And looks like this:
   <div id='footnote4' class='footnote'>
     <span class='footnote-number'><sup>4</sup></span>Han's carpety first mate
   </div>
-  
+
 </div>
 
 ## Contributing
