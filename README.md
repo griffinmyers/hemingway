@@ -160,7 +160,7 @@ Add labels to a list with `\item[label]`:
 ```html
 \begin{itemize}\item[bros] before hoes \item \n [chicks] before dicks \end{itemize} : <ul><li><span class='list-label'>bros</span> before hoes </li><li><span class='list-label'>chicks</span> before dicks </li></ul>
 
-\begin{description} \item [Frodo] Intrepid Adventuerer \item [Sam] Faithful Companion \end{description} : <dl><dd><dt>Frodo</dt> Intrepid Adventuerer </dd><dd><dt>Sam</dt> Faithful Companion </dd></dl>
+\begin{description} \item [Frodo] Intrepid Adventurer \item [Sam] Faithful Companion \end{description} : <dl><dd><dt>Frodo</dt> Intrepid Adventurer </dd><dd><dt>Sam</dt> Faithful Companion </dd></dl>
 ```
 
 Go ahead, nest lists in all sorts of interesting ways. No reason you couldn't chuck some empahsized text in a label either. 
@@ -181,9 +181,9 @@ I might have made a bad assumption here and used the `<sup>` tag for the footnot
 
 For example this latex markup:
 
-> So we met up with Han and saw his ship, The Millenium Falcon\footnote{a total piece of junk}. I had no idea how that thing was supposed to get us to Alderaan\footnote{location of the \emph{hidden rebel base}}. 
+> So we met up with Han and saw his ship, The Millennium Falcon\footnote{a total piece of junk}. I had no idea how that thing was supposed to get us to Alderaan\footnote{location of the \emph{hidden rebel base}}. 
 
-> On board we found homely accomodations including a Dejarik\footnote{much like chess} set that I indluged in with Chewbacca\footnote{Han's carpety first mate}.
+> On board we found homely accommodations including a Dejarik\footnote{much like chess} set that I indulged in with Chewbacca\footnote{Han's carpety first mate}.
 
 Renders to this html: 
 
@@ -193,7 +193,7 @@ Renders to this html:
     So we met up with Han and saw his ship, The Millenium Falcon<a href='#footnote1'><span class='inline-footnote-number'><sup>1</sup></span></a>. I had no idea how that thing was supposed to get us to Alderaan<a href='#footnote2'><span class='inline-footnote-number'><sup>2</sup></span></a>. 
   </p>
   <p>
-    On board we found homely accomodations including a Dejarik<a href='#footnote3'><span class='inline-footnote-number'><sup>3</sup></span></a> set that I indluged in with Chewbacca<a href='#footnote4'><span class='inline-footnote-number'><sup>4</sup></span></a>.
+    On board we found homely accommodations including a Dejarik<a href='#footnote3'><span class='inline-footnote-number'><sup>3</sup></span></a> set that I indulged in with Chewbacca<a href='#footnote4'><span class='inline-footnote-number'><sup>4</sup></span></a>.
   </p>
 
   <div id='footnote1' class='footnote'>
@@ -219,10 +219,10 @@ And looks like this:
 
 <div class='entry'>
   <p>
-    So we met up with Han and saw his ship, The Millenium Falcon<a href='#footnote1'><span class='inline-footnote-number'><sup>1</sup></span></a>. I had no idea how that thing was supposed to get us to Alderaan<a href='#footnote2'><span class='inline-footnote-number'><sup>2</sup></span></a>. 
+    So we met up with Han and saw his ship, The Millennium Falcon<a href='#footnote1'><span class='inline-footnote-number'><sup>1</sup></span></a>. I had no idea how that thing was supposed to get us to Alderaan<a href='#footnote2'><span class='inline-footnote-number'><sup>2</sup></span></a>. 
   </p>
   <p>
-    On board we found homely accomodations including a Dejarik<a href='#footnote3'><span class='inline-footnote-number'><sup>3</sup></span></a> set that I indluged in with Chewbacca<a href='#footnote4'><span class='inline-footnote-number'><sup>4</sup></span></a>.
+    On board we found homely accommodations including a Dejarik<a href='#footnote3'><span class='inline-footnote-number'><sup>3</sup></span></a> set that I indulged in with Chewbacca<a href='#footnote4'><span class='inline-footnote-number'><sup>4</sup></span></a>.
   </p>
 
   <div id='footnote1' class='footnote'>
