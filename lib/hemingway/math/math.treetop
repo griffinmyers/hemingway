@@ -1,10 +1,7 @@
-require "hemingway/symbols.treetop"
 require "hemingway/math/math"
 
 module Hemingway
   grammar Math
-
-    include Symbols
 
     # Example: $ \Pi = 3.14159 $
     rule math

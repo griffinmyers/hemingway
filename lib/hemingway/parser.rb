@@ -1,7 +1,6 @@
 require "treetop"
 require "polyglot"
 require "hemingway/latex.treetop"
-require "hemingway/symbols.treetop"
 
 module Hemingway
 

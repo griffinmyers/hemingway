@@ -1,5 +1,7 @@
+require "hemingway/symbol/symbol"
+
 module Hemingway
-  grammar Symbols
+  grammar Symbol
 
     rule math_symbol
       (
@@ -38,11 +40,7 @@ module Hemingway
         "\\chi" /
         "\\psi" /
         "\\omega"
-      ) {
-        def html
-          Build.symbol(text_value)
-        end
-      }
+      ) <SymbolNode>
     end
 
   end

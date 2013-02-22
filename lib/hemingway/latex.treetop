@@ -1,11 +1,12 @@
 require 'hemingway/build'
 require 'hemingway/latex'
-require "hemingway/special/special.treetop"
-require "hemingway/tag/tag.treetop"
-require "hemingway/math/math.treetop"
-require "hemingway/text/text.treetop"
 require "hemingway/block/block.treetop"
 require "hemingway/footnote/footnote.treetop"
+require "hemingway/math/math.treetop"
+require "hemingway/special/special.treetop"
+require "hemingway/symbol/symbol.treetop"
+require "hemingway/tag/tag.treetop"
+require "hemingway/text/text.treetop"
 
 module Hemingway
   grammar Latex
@@ -16,6 +17,7 @@ module Hemingway
     include Text
     include Block
     include Footnote
+    include Symbol
 
     rule document
       entry
