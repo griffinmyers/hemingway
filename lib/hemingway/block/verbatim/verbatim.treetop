@@ -13,7 +13,7 @@ module Hemingway
       end
 
       rule verbatim_text
-        ( !escape . )+ <TextNode>
+        ( !( block_end verbatim_type "}" ) . )+ <TextNode>
       end
 
     end
