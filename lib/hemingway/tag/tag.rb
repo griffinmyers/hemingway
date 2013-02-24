@@ -2,7 +2,7 @@ module Hemingway
   module TagNode
     def html
       tag_type.html(sequence.elements.map { |c| c.html }.join)
-    end 
+    end
   end
 
   module VerticalSpaceTagNode
@@ -11,23 +11,29 @@ module Hemingway
     end
   end
 
+  module HFillNode
+    def html
+      Build.tag("span", sequence.elements.map { |c| c.content.html }.join, :class => "pull-right")
+    end
+  end
+
   module EmphTagNode
     def html(content)
       Build.tag("em", content)
     end
-  end 
+  end
 
   module TextttTagNode
     def html(content)
       Build.tag("code", content)
     end
-  end 
+  end
 
   module TextbfTagNode
     def html(content)
       Build.tag("strong", content)
     end
-  end 
+  end
 
   module TextscTagNode
     def html(content)

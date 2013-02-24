@@ -264,6 +264,18 @@ maps to
 </blockquote>
 ```
 
+###### Inline Right Justification
+
+```html
+The love, \hfill Will
+```
+
+maps to
+
+```html
+The love, <span class="pull-right">Will</span>
+```
+
 ## Contributing
 
 1. Fork it
