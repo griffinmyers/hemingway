@@ -12,9 +12,9 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{Hemingway is a LaTeX to HTML parser.}
   gem.homepage      = "https://rubygems.org/gems/hemingway"
 
-  gem.add_development_depedency "rspec"
-  gem.add_development_depedency "treetop"
-  gem.add_development_depedency "polyglot"
+  gem.add_development_dependency "rspec"
+  gem.add_development_dependency "treetop"
+  gem.add_development_dependency "polyglot"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
