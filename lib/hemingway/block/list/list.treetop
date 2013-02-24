@@ -8,7 +8,7 @@ module Hemingway
         item+
       end
 
-      rule list_type      
+      rule list_type
         "itemize" <ItemizeListNode>
         /
         "enumerate" <EnumerateListNode>
@@ -21,14 +21,21 @@ module Hemingway
       end
 
       rule label
-        label_start sequence:label_content* label_end <LabelNode> 
+        label_start sequence:label_content* label_end <LabelNode>
       end
 
       # This is oddly similar to content. We have to use label_text
       # instead of text though.. big time bummer.. gotta esacape that label
-      # closing bracket. 
+      # closing bracket.
       rule label_content
         special / tag / block / math / label_text
+      end
+
+      # Example: \item[label_text]
+      # This totally sucks, but I need to escape a special character when
+      # I have text that resides within an item label. Oof.
+      rule label_text
+        ( !( non_text / label_end ) . )+ <TextNode>
       end
 
       rule label_start

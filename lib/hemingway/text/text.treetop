@@ -4,37 +4,26 @@ module Hemingway
   grammar Text
 
     # Example: blah blah blah
-    # Notes: 
+    # Notes:
     #  - Okay so this is midly confusing. It's super important to keep the idea
-    # of what text is consumed in mind. If I just have the rule as 
+    # of what text is consumed in mind. If I just have the rule as
     #
-    #                          !( tag_start / eop)+ 
+    #                          !( tag_start / eop)+
     #
     # it will never consume any text [because negative lookahead assertions
     # don't consume text]. When this runs it would just sit on the first
     # character and continually check for tag_start, causing a deadspin if it
     # wasn't a tag_start. To fix this, make it a sequence with '.'. The '.' will
     # consume any input and keep that index moving along until in fact we find
-    # our tag_start.   
+    # our tag_start.
     #  - Okay another super important consideration: I MUST use
     # the + rather than the *. If I use *, then the empty string will match
     # text, and because the parent rule of paragraph has zero or more texts in
     # a sequence, it will forever match the empty string and never move onto
     # eop. We much only match text when there is one or more characters, a
-    # totally reasonable rule. 
+    # totally reasonable rule.
     rule text
       ( !non_text . )+ <TextNode>
-    end
-
-    # Example: \item[label_text]
-    # This totally sucks, but I need to escape a special character when
-    # I have text that resides within an item label. Oof.
-    rule label_text
-      ( !( non_text / label_end ) . )+ <TextNode>
-    end
-
-    rule verbatim_text
-        ( !escape . )+ <TextNode>
     end
 
     # If you hit any of these while chomping on text you should pop out

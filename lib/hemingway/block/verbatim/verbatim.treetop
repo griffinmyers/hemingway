@@ -12,6 +12,10 @@ module Hemingway
         "verbatim" <VerbatimNode>
       end
 
+      rule verbatim_text
+        ( !escape . )+ <TextNode>
+      end
+
     end
   end
 end

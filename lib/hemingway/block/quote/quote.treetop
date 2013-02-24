@@ -1,0 +1,27 @@
+require "hemingway/block/quote/quote"
+
+module Hemingway
+  module Block
+    grammar Quote
+
+      rule quote_type
+        "quote" <QuoteNode>
+      end
+
+      rule quote_entry
+        ( quote_paragraph / quote_last_paragraph )* <QuoteEntryNode>
+      end
+
+      # This quote_paragraph / quote_last_paragraph business is the same pattern
+      # I use with paragraph and last paragraph.
+      rule quote_paragraph
+        sequence:( content )* eop <QuoteParagraphNode>
+      end
+
+      rule quote_last_paragraph
+        sequence:( content )+ eop? <QuoteParagraphNode>
+      end
+
+    end
+  end
+end

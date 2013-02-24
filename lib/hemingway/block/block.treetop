@@ -1,36 +1,27 @@
 require "hemingway/block/block"
 require "hemingway/block/list/list.treetop"
 require "hemingway/block/verbatim/verbatim.treetop"
+require "hemingway/block/quote/quote.treetop"
 
 module Hemingway
   grammar Block
 
     include List
     include Verbatim
+    include Quote
 
-    # Example: 
+    # Example:
     #   \begin{itemize}
-    #   \item[Chewbacca] Wookie 
+    #   \item[Chewbacca] Wookie
     #   \item[Han] Smuggler
-    #   \item[Anakin] Savant  
+    #   \item[Anakin] Savant
     #   \end{itemize}
-    # Notes: 
-    #  - Definitely a consideration here should be that block_content is in 
-    #    no way enforced by block_type, even though maybe it should be?
-    #    Like- if we're creating a list and we pass it input that is for a 
-    #    \\begin{verbatim} instead the parser won't complain. 
-
     rule block
-      block_start type:block_type "}" whitespace block_content whitespace block_end block_type "}" 
-      &{ |seq| seq[1].text_value == seq[7].text_value } <BlockNode>
-    end
-
-    rule block_type
-      list_type / verbatim_type
-    end
-
-    rule block_content
-      list / verbatim
+      (
+        block_start type:list_type "}" whitespace content:list whitespace block_end list_type "}" &{ |seq| seq[1].text_value == seq[7].text_value } /
+        block_start type:verbatim_type "}" whitespace content:verbatim whitespace block_end verbatim_type "}" /
+        block_start type:quote_type "}" whitespace content:quote_entry whitespace block_end quote_type "}"
+      ) <BlockNode>
     end
 
     rule block_start

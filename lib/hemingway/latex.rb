@@ -2,14 +2,12 @@ module Hemingway
 
   module EntryNode
     def html
-      footnote_number = 0
       footnote_content = []
       paragraph_html = ""
 
       elements.each do |e|
-        paragraph_html += e.html(footnote_number)
-        footnote_content += e.footnote_html(footnote_number)
-        footnote_number = footnote_content.size
+        paragraph_html += e.html(footnote_content.size)
+        footnote_content += e.footnote_html(footnote_content.size)
       end
 
       footnote_html = footnote_content.join
@@ -19,11 +17,11 @@ module Hemingway
   end
 
   module ParagraphNode
-    def html(footnote_number)
+    def html(footnote_seed)
       paragraph_content = sequence.elements.map do |element|
         if element.respond_to?(:footnote_html)
-          footnote_number += 1
-          element.html(footnote_number)
+          footnote_seed += 1
+          element.html(footnote_seed)
         else
           element.html
         end
@@ -32,11 +30,11 @@ module Hemingway
       Build.tag("p", paragraph_content)
     end
 
-    def footnote_html(footnote_number)
+    def footnote_html(footnote_seed)
       footnote_content = sequence.elements.reduce([]) do |memo, element|
         if element.respond_to?(:footnote_html)
-          footnote_number += 1
-          memo + [element.footnote_html(footnote_number)]
+          footnote_seed += 1
+          memo + [element.footnote_html(footnote_seed)]
         else
           memo
         end

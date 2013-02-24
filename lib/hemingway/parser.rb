@@ -12,21 +12,21 @@ module Hemingway
     end
 
     def parse(input, options={})
-      @latex_parser.parse(pad(input), options)
+      @latex_parser.parse(input, options)
     end
 
     def method_missing(method, *args, &block)
       @latex_parser.send(method, *args, &block)
     end
 
-    private 
+    private
     # This method pads input with two extra newline characters. The parser
     # relies on file terminating with two or more newlines, so this just
-    # enforces that any input abides by this stipulation. 
+    # enforces that any input abides by this stipulation.
     def pad(input)
       input + "\n\n"
     end
-    
+
   end
 
 end

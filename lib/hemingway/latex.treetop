@@ -24,38 +24,47 @@ module Hemingway
     end
 
     rule entry
-      ( paragraph )* <EntryNode>
+      ( paragraph / last_paragraph )* <EntryNode>
     end
 
-    # Example: These aren't the \n\n droids you're looking for \n\n. 
-    # Notes: 
+    # Example: These aren't the \n\n droids you're looking for \n\n.
+    # Notes:
     #   - Okay so this is interesting. When you reference something with a * or
-    #   a +, then you're creating a top level array-like structure that you'll 
-    #   have to dig past to get at the list. elements[0] refers to the array of 
-    #   tags or texts here. 
+    #   a +, then you're creating a top level array-like structure that you'll
+    #   have to dig past to get at the list. elements[0] refers to the array of
+    #   tags or texts here.
     rule paragraph
       sequence:( content / footnote )* eop <ParagraphNode>
     end
 
+    # The last paragraph in an entry need not end with \n\n. Because this
+    # comes second in the ordered choice for entry, it will only be used
+    # if a paragraph has concluded for some reason and there wasn't an eop
+    # to consume. The only time I can imagine this happening would be at
+    # the end of an entry.
+    rule last_paragraph
+      sequence:( content / footnote )+ eop? <ParagraphNode>
+    end
+
     # Example: \tag{text} or just text or $\Delta$
-    # Notes: 
+    # Notes:
     #  - So I can define methods based on the ordered choice in the top
     #  level of this rule. Text is already its own thing though, so an html
     #  method need not be defined on it because alas, it already exists as
     #  defined in the text rule itself!
     rule content
       special / tag / block / math / text
-    end 
+    end
 
-    # Treetop does not separate lexing from parsing. Must consume all input. 
+    # Treetop does not separate lexing from parsing. Must consume all input.
     rule whitespace
       ( " " / newline )*
     end
 
     # End of paragraph. Originally this had a choice for EOF, but I can't
     # seem to find a good way for Treetop to process that. My workaround
-    # strategy will be to append some newlines onto the end of the input 
-    # string. 
+    # strategy will be to append some newlines onto the end of the input
+    # string.
     rule eop
       newline 2..
     end

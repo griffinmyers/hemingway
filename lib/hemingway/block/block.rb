@@ -2,7 +2,7 @@ module Hemingway
 
   module BlockNode
     def html
-      type.html(block_content)
+      type.html(content)
     end
   end
 
