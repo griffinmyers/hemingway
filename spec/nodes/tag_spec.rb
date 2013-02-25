@@ -84,6 +84,15 @@ module Hemingway
 
     end
 
+    describe '#neatline' do
+
+      it 'allows me to add fancy <hr>s to a page' do
+        html = @parser.parse("\\neatline").html
+        html.should == "<div class='entry'><p><hr class='neatline'></p></div>"
+      end
+
+    end
+
   end
 
 end

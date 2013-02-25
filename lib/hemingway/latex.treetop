@@ -61,6 +61,10 @@ module Hemingway
       ( " " / newline )*
     end
 
+    rule spaces
+      ( " " )*
+    end
+
     # End of paragraph. Originally this had a choice for EOF, but I can't
     # seem to find a good way for Treetop to process that. My workaround
     # strategy will be to append some newlines onto the end of the input

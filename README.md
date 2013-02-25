@@ -276,6 +276,12 @@ maps to
 The love, <span class="pull-right">Will</span>
 ```
 
+###### Horizontal Rules
+
+```html
+\neatline : <hr class='neatline'><
+```
+
 ## Contributing
 
 1. Fork it

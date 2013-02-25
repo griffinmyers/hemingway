@@ -20,28 +20,32 @@ module Hemingway
       end
 
       it 'should generate a tag with content and a class' do
-        Build.tag(attribute, content, :class => klass) == "<#{attribute} class='#{klass}'>#{content}</#{attribute}>"
-      end 
+        Build.tag(attribute, content, :class => klass).should == "<#{attribute} class='#{klass}'>#{content}</#{attribute}>"
+      end
 
       it 'should generate a tag with content and an id' do
-        Build.tag(attribute, content, :id => id) == "<#{attribute} id='#{id}'>#{content}</#{attribute}>"
-      end 
+        Build.tag(attribute, content, :id => id).should == "<#{attribute} id='#{id}'>#{content}</#{attribute}>"
+      end
 
       it 'should generate a tag with content and an href' do
-        Build.tag(attribute, content, :href => href) == "<#{attribute} href='#{href}'>#{content}</#{attribute}>"
-      end 
+        Build.tag(attribute, content, :href => href).should == "<#{attribute} href='#{href}'>#{content}</#{attribute}>"
+      end
 
       it 'should generate a tag with content and an id and a class' do
-        Build.tag(attribute, content, :id => id, :class => klass) == "<#{attribute} id='#{id}' class='#{klass}'>#{content}</#{attribute}>"
-      end 
+        Build.tag(attribute, content, :id => id, :class => klass).should == "<#{attribute} id='#{id}' class='#{klass}'>#{content}</#{attribute}>"
+      end
 
       it 'should generate a tag with content and an id and a class and an href' do
-        Build.tag(attribute, content, :id => id, :class => klass, :href => href) == "<#{attribute} id='#{id}' class='#{klass}' href='#{href}'>#{content}</#{attribute}>"
-      end 
+        Build.tag(attribute, content, :id => id, :class => klass, :href => href).should == "<#{attribute} id='#{id}' class='#{klass}' href='#{href}'>#{content}</#{attribute}>"
+      end
 
       # Can't wait for Ruby 2.0
       it 'should generate a tag with content and a class and no content' do
-        Build.tag(attribute, nil, :class => klass) == "<#{attribute} class='#{klass}'></#{attribute}>"
+        Build.tag(attribute, nil, :class => klass).should == "<#{attribute} class='#{klass}'></#{attribute}>"
+      end
+
+      it 'should allow me to create a tag that doesnt close' do
+        Build.tag("hr", nil, :close_tag => false).should == "<hr>"
       end
 
     end

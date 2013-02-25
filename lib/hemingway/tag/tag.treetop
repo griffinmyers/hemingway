@@ -8,7 +8,9 @@ module Hemingway
       /
       tag_start vertical_space "{" vertical_height "}" <VerticalSpaceTagNode>
       /
-      tag_start "hfill " sequence:( !newline content )* <HFillNode>
+      tag_start hfill spaces sequence:( !newline content )* <HFillNode>
+      /
+      tag_start neatline <NeatLineNode>
     end
 
     # All tag types will be responsible with implementing their own
@@ -39,6 +41,14 @@ module Hemingway
 
     rule millimeter
       "mm"
+    end
+
+    rule hfill
+      "hfill"
+    end
+
+    rule neatline
+      "neatline"
     end
 
     rule tag_start

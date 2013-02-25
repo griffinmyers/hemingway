@@ -7,13 +7,19 @@ module Hemingway
 
   module VerticalSpaceTagNode
     def html
-      Build.tag("div", "", :class => "vspace#{vertical_height.height.text_value}")
+      Build.tag("div", nil, :class => "vspace#{vertical_height.height.text_value}")
     end
   end
 
   module HFillNode
     def html
       Build.tag("span", sequence.elements.map { |c| c.content.html }.join, :class => "pull-right")
+    end
+  end
+
+  module NeatLineNode
+    def html
+      Build.tag("hr", nil, :class => "neatline", :close_tag => false)
     end
   end
 
