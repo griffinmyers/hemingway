@@ -8,14 +8,14 @@ module Hemingway
     #  - Okay so this is midly confusing. It's super important to keep the idea
     # of what text is consumed in mind. If I just have the rule as
     #
-    #                          !( tag_start / eop)+
+    #                          !( non_text / eop)+
     #
     # it will never consume any text [because negative lookahead assertions
     # don't consume text]. When this runs it would just sit on the first
-    # character and continually check for tag_start, causing a deadspin if it
-    # wasn't a tag_start. To fix this, make it a sequence with '.'. The '.' will
+    # character and continually check for non_text, causing a deadspin if it
+    # wasn't a non_text. To fix this, make it a sequence with '.'. The '.' will
     # consume any input and keep that index moving along until in fact we find
-    # our tag_start.
+    # our non_text.
     #  - Okay another super important consideration: I MUST use
     # the + rather than the *. If I use *, then the empty string will match
     # text, and because the parent rule of paragraph has zero or more texts in
@@ -28,7 +28,7 @@ module Hemingway
 
     # If you hit any of these while chomping on text you should pop out
     rule non_text
-      escape / tag_start / tag_end / math_start / newline
+      escape / tag_end / math_start / newline
     end
 
   end
