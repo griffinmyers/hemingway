@@ -1,5 +1,3 @@
-require "treetop"
-require "polyglot"
 require 'hemingway'
 
 RSpec.configure do |config|
