@@ -5,7 +5,7 @@ module Hemingway
   describe LatexParser do
 
     before do
-      @parser = Parser.new
+      @parser = LatexParser.new
     end
 
     describe "#basics" do

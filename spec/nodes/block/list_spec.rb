@@ -5,8 +5,8 @@ module Hemingway
   describe LatexParser do
 
     before do
-      @parser = Parser.new
-    end 
+      @parser = LatexParser.new
+    end
 
     describe "#itemize" do
 
@@ -18,7 +18,7 @@ module Hemingway
       it 'eats up any extra newlines and such between items' do
         html = @parser.parse("\\begin{itemize}\\item thing 1 \n\n\n \\item thing 2 \n \\end{itemize}").html
         html.should == "<div class='entry'><p><ul><li>thing 1 </li><li>thing 2 </li></ul></p></div>"
-      end 
+      end
 
       it 'supports text, tags, special chars, math inline' do
         html = @parser.parse("\\begin{itemize}\\item hey \\emph{$\\lambda$} \\$ buddies \\end{itemize}").html

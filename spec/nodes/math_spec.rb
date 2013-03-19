@@ -5,8 +5,8 @@ module Hemingway
   describe LatexParser do
 
     before do
-      @parser = Parser.new
-    end 
+      @parser = LatexParser.new
+    end
 
     describe "#math" do
       it 'should parse out a math symbol' do
@@ -25,7 +25,7 @@ module Hemingway
       end
 
     end
-    
+
   end
 
 end

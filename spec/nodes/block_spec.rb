@@ -5,8 +5,8 @@ module Hemingway
   describe LatexParser do
 
     before do
-      @parser = Parser.new
-    end 
+      @parser = LatexParser.new
+    end
 
     describe "#block" do
 
