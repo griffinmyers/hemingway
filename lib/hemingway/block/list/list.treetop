@@ -1,4 +1,4 @@
-require "hemingway/block/list/list"
+require "hemingway/block/list/list_nodes"
 
 module Hemingway
   module Block

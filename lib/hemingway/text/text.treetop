@@ -1,4 +1,4 @@
-require "hemingway/text/text"
+require "hemingway/text/text_nodes"
 
 module Hemingway
   grammar Text

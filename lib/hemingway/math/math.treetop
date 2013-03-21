@@ -1,4 +1,4 @@
-require "hemingway/math/math"
+require "hemingway/math/math_nodes"
 
 module Hemingway
   grammar Math
@@ -9,10 +9,10 @@ module Hemingway
     end
 
     # Example : \Pi
-    # Notes: 
-    #  - Once again, math_symbol need not have an html method defined on it. 
-    #  When .html is called on symbol, it knows the match is actually a 
-    #  math_symbol, so that is what symbol.html is actually calling. 
+    # Notes:
+    #  - Once again, math_symbol need not have an html method defined on it.
+    #  When .html is called on symbol, it knows the match is actually a
+    #  math_symbol, so that is what symbol.html is actually calling.
     rule symbol
       math_symbol
     end

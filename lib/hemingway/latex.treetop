@@ -1,6 +1,5 @@
 require 'hemingway/build'
-require 'hemingway/latex'
-
+require 'hemingway/latex_nodes'
 require "hemingway/block/block.treetop"
 require "hemingway/footnote/footnote.treetop"
 require "hemingway/math/math.treetop"

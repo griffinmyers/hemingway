@@ -1,4 +1,4 @@
-require "hemingway/footnote/footnote"
+require "hemingway/footnote/footnote_nodes"
 
 module Hemingway
   grammar Footnote

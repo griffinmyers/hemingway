@@ -1,4 +1,4 @@
-require "hemingway/tag/tag"
+require "hemingway/tag/tag_nodes"
 
 module Hemingway
   grammar Tag

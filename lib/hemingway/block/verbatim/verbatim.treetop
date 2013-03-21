@@ -1,4 +1,4 @@
-require "hemingway/block/verbatim/verbatim"
+require "hemingway/block/verbatim/verbatim_nodes"
 
 module Hemingway
   module Block

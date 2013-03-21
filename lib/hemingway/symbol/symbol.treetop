@@ -1,4 +1,4 @@
-require "hemingway/symbol/symbol"
+require "hemingway/symbol/symbol_nodes"
 
 module Hemingway
   grammar Symbol

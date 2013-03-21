@@ -1,4 +1,4 @@
-require "hemingway/block/quote/quote"
+require "hemingway/block/quote/quote_nodes"
 
 module Hemingway
   module Block
