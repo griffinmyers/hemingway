@@ -4,7 +4,7 @@ def compile_and_recurse
 
 	# Compile all of the treetop files in the pwd
 	Dir.glob("*.treetop").each do |treetop_file|
-		system "tt #{treetop_file}"
+		system "tt -f #{treetop_file}"
 	end
 
 	# Get a list of all the directories in the pwd
