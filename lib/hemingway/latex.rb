@@ -3,13 +3,13 @@
 
 require 'hemingway/build'
 require 'hemingway/latex_nodes'
-require "hemingway/block/block.treetop"
-require "hemingway/footnote/footnote.treetop"
-require "hemingway/math/math.treetop"
-require "hemingway/special/special.treetop"
-require "hemingway/symbol/symbol.treetop"
-require "hemingway/tag/tag.treetop"
-require "hemingway/text/text.treetop"
+require "hemingway/block/block"
+require "hemingway/footnote/footnote"
+require "hemingway/math/math"
+require "hemingway/special/special"
+require "hemingway/symbol/symbol"
+require "hemingway/tag/tag"
+require "hemingway/text/text"
 
 module Hemingway
   module Latex

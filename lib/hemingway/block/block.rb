@@ -2,9 +2,9 @@
 
 
 require "hemingway/block/block_nodes"
-require "hemingway/block/list/list.treetop"
-require "hemingway/block/verbatim/verbatim.treetop"
-require "hemingway/block/quote/quote.treetop"
+require "hemingway/block/list/list"
+require "hemingway/block/verbatim/verbatim"
+require "hemingway/block/quote/quote"
 
 module Hemingway
   module Block
