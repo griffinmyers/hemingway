@@ -4,6 +4,11 @@ Hemingway can translate a very rigid subset of LaTeX commands into HTML markup t
 
 The parser was created using Treetop, so it might be useful to consult the [Treetop Documentation](http://treetop.rubyforge.org/syntactic_recognition.html) to learn more about the inner workings.
 
+Throughout you'll notice this character: `\\`. This is the string represntation of the `\` character.
+
+So if your latex is coming from a file you would just write `\emph{wookies}`, and if it were programatically coming from a string
+you would write `\\emph{wookies}`
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -73,19 +78,19 @@ wookie\n\nbreakfast : <p>wookie></p><p>breakfast</p>
 Adds inline styling
 
 ```html
-That’s no moon, \emph{it’s a space station.} : That’s no moon, <em>it’s a space station.</em>
+That’s no moon, \\emph{it’s a space station.} : That’s no moon, <em>it’s a space station.</em>
 
-\textbf{The Force} : <strong>The Force</strong>
+\\textbf{The Force} : <strong>The Force</strong>
 
-\texttt{R2-D2} : <code>R2-D2</code>
+\\texttt{R2-D2} : <code>R2-D2</code>
 
-\textsc{Death Star} : <span class='textsc'>Death Star</span>
+\\textsc{Death Star} : <span class='textsc'>Death Star</span>
 ```
 
 Or some vertical padding
 
 ```html
-\vspace{5mm} : <div class='vspace5'></div>
+\\vspace{5mm} : <div class='vspace5'></div>
 ```
 
 ###### Maths
@@ -93,54 +98,54 @@ Or some vertical padding
 Adds math symbols
 
 ```html
-$\Gamma$" : &Gamma;
-$\Delta$" : &Delta;
-$\Theta$" : &Theta;
-$\Lambda$" : &Lambda;
-$\Xi$" : &Xi;
-$\Pi$" : &Pi;
-$\Sigma$" : &Sigma;
-$\Upsilon$" : &Upsilon;
-$\Phi$" : &Phi;
-$\Psi$" : &Psi;
-$\Omega$" : &Omega;
-$\alpha$" : &alpha;
-$\beta$" : &beta;
-$\gamma$" : &gamma;
-$\delta$" : &delta;
-$\epsilon$" : &epsilon;
-$\zeta$" : &zeta;
-$\eta$" : &eta;
-$\theta$" : &theta;
-$\iota$" : &iota;
-$\kappa$" : &kappa;
-$\lambda$" : &lambda;
-$\mu$" : &mu;
-$\nu$" : &nu;
-$\xi$" : &xi;
-$\pi$" : &pi;
-$\rho$" : &rho;
-$\varsigma$" : &sigmaf;
-$\sigma$" : &sigma;
-$\tau$" : &tau;
-$\upsilon$" : &upsilon;
-$\phi$" : &phi;
-$\chi$" : &chi;
-$\psi$" : &psi;
-$\omega$" : &omega;
+$\\Gamma$" : &Gamma;
+$\\Delta$" : &Delta;
+$\\Theta$" : &Theta;
+$\\Lambda$" : &Lambda;
+$\\Xi$" : &Xi;
+$\\Pi$" : &Pi;
+$\\Sigma$" : &Sigma;
+$\\Upsilon$" : &Upsilon;
+$\\Phi$" : &Phi;
+$\\Psi$" : &Psi;
+$\\Omega$" : &Omega;
+$\\alpha$" : &alpha;
+$\\beta$" : &beta;
+$\\gamma$" : &gamma;
+$\\delta$" : &delta;
+$\\epsilon$" : &epsilon;
+$\\zeta$" : &zeta;
+$\\eta$" : &eta;
+$\\theta$" : &theta;
+$\\iota$" : &iota;
+$\\kappa$" : &kappa;
+$\\lambda$" : &lambda;
+$\\mu$" : &mu;
+$\\nu$" : &nu;
+$\\xi$" : &xi;
+$\\pi$" : &pi;
+$\\rho$" : &rho;
+$\\varsigma$" : &sigmaf;
+$\\sigma$" : &sigma;
+$\\tau$" : &tau;
+$\\upsilon$" : &upsilon;
+$\\phi$" : &phi;
+$\\chi$" : &chi;
+$\\psi$" : &psi;
+$\\omega$" : &omega;
 ```
 
 
 ###### Special Characters
 
 ```html
-\# : #
-\$ : $
-\% : %
-\& : &
-\_ : _
-\{ : {
-\} : }
+\\# : #
+\\$ : $
+\\% : %
+\\& : &
+\\_ : _
+\\{ : {
+\\} : }
 ```
 
 ###### Blocks
@@ -148,19 +153,19 @@ $\omega$" : &omega;
 You can make lists with `itemize`, `description`, or `enumerate`.
 
 ```html
-\begin{itemize}\item Wookie \item Jedi \end{itemize} : <ul><li>Wookie </li><li>Jedi </li></ul>
+\\begin{itemize}\\item Wookie \\item Jedi \\end{itemize} : <ul><li>Wookie </li><li>Jedi </li></ul>
 
-\begin{enumerate} \item Frodo \item Sam \end{enumerate} : <ol><li>Frodo </li><li>Sam </li></ol>
+\\begin{enumerate} \\item Frodo \\item Sam \\end{enumerate} : <ol><li>Frodo </li><li>Sam </li></ol>
 
-\begin{description} \item Ginger-Nut \item Turkey \end{description} : <dl><dd>Ginger-Nut </dd><dd>Turkey </dd></dl>
+\\begin{description} \\item Ginger-Nut \\item Turkey \\end{description} : <dl><dd>Ginger-Nut </dd><dd>Turkey </dd></dl>
 ```
 
 Add labels to a list with `\item[label]`:
 
 ```html
-\begin{itemize}\item[bros] before hoes \item \n [chicks] before dicks \end{itemize} : <ul><li><span class='list-label'>bros</span> before hoes </li><li><span class='list-label'>chicks</span> before dicks </li></ul>
+\\begin{itemize}\\item[bros] before hoes \\item \\n [chicks] before dicks \\end{itemize} : <ul><li><span class='list-label'>bros</span> before hoes </li><li><span class='list-label'>chicks</span> before dicks </li></ul>
 
-\begin{description} \item [Frodo] Intrepid Adventurer \item [Sam] Faithful Companion \end{description} : <dl><dd><dt>Frodo</dt> Intrepid Adventurer </dd><dd><dt>Sam</dt> Faithful Companion </dd></dl>
+\\begin{description} \\item [Frodo] Intrepid Adventurer \\item [Sam] Faithful Companion \\end{description} : <dl><dd><dt>Frodo</dt> Intrepid Adventurer </dd><dd><dt>Sam</dt> Faithful Companion </dd></dl>
 ```
 
 Go ahead, nest lists in all sorts of interesting ways. No reason you couldn't chuck some empahsized text in a label either.
@@ -168,7 +173,7 @@ Go ahead, nest lists in all sorts of interesting ways. No reason you couldn't ch
 Enter in preformatted text:
 
 ```html
-\begin{verbatim} don't  we  \n \n all wish \n \n   for a little sleep? \end{verbatim}") : <pre>don't  we  \n \n all wish \n \n   for a little sleep? </pre>
+\\begin{verbatim} don't  we  \n \n all wish \n \n   for a little sleep? \\end{verbatim}") : <pre>don't  we  \n \n all wish \n \n   for a little sleep? </pre>
 ```
 
 ###### Footnotes
@@ -181,9 +186,9 @@ I might have made a bad assumption here and used the `<sup>` tag for the footnot
 
 For example this latex markup:
 
-> So we met up with Han and saw his ship, The Millennium Falcon\footnote{a total piece of junk}. I had no idea how that thing was supposed to get us to Alderaan\footnote{location of the \emph{hidden rebel base}}.
+> So we met up with Han and saw his ship, The Millennium Falcon\\footnote{a total piece of junk}. I had no idea how that thing was supposed to get us to Alderaan\\footnote{location of the \\emph{hidden rebel base}}.
 
-> On board we found homely accommodations including a Dejarik\footnote{much like chess} set that I indulged in with Chewbacca\footnote{Han's carpety first mate}.
+> On board we found homely accommodations including a Dejarik\\footnote{much like chess} set that I indulged in with Chewbacca\\footnote{Han's carpety first mate}.
 
 Renders to this html:
 
@@ -249,9 +254,9 @@ Pretty standard. You can put anything in there except a footnote. That seemed
 excessive.
 
 ```html
-\begin{quote}
-Have you guys ever heard the song \emph{Blow} by \emph{MILF}?
-\end{quote}
+\\begin{quote}
+Have you guys ever heard the song \\emph{Blow} by \\emph{MILF}?
+\\end{quote}
 ```
 
 maps to
@@ -267,7 +272,7 @@ maps to
 ###### Inline Right Justification
 
 ```html
-The love, \hfill Will
+The love, \\hfill Will
 ```
 
 maps to
@@ -279,7 +284,7 @@ The love, <span class="pull-right">Will</span>
 ###### Horizontal Rules
 
 ```html
-\neatline : <hr class='neatline'>
+\\neatline : <hr class='neatline'>
 ```
 
 ## Contributing
