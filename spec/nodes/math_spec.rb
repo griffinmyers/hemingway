@@ -2,10 +2,10 @@ require 'spec_helper'
 
 module Hemingway
 
-  describe LatexParser do
+  describe Parser do
 
     before do
-      @parser = LatexParser.new
+      @parser = Parser.new
     end
 
     describe "#math" do
