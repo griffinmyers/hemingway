@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+def compile_and_recurse
+
+	# Compile all of the treetop files in the pwd
+	Dir.glob("*.treetop").each do |treetop_file|
+		system "tt #{treetop_file}"
+	end
+
+	# Get a list of all the directories in the pwd
+	Dir.glob("*").select do |file_name|
+		Dir.exists?(file_name)
+	end.each do |dir|
+		Dir.chdir(dir)
+		compile_and_recurse
+		Dir.chdir("..")
+	end
+
+end
+
+Dir.chdir("lib/hemingway")
+compile_and_recurse
