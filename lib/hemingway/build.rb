@@ -5,13 +5,15 @@ module Hemingway
   class Build
     def self.tag(html_attribute, html_content=nil, options={})
       String.new.tap do |t|
-        t << "<" + html_attribute
-        t << " id='" + options[:id] + "'" if options[:id]
-        t << " class='" + options[:class] + "'" if options[:class]
-        t << " href='" + options[:href] + "'" if options[:href]
+        t << "<#{html_attribute}"
+
+        options.select { |k, v| k != :close_tag }.each do |k, v|
+          t << " #{k}='#{v}'"
+        end
+
         t << ">"
         t << html_content if html_content
-        t << "</" + html_attribute + ">" unless options[:close_tag] == false
+        t << "</#{html_attribute}>" unless options[:close_tag] == false
       end
     end
 

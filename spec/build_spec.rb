@@ -39,6 +39,10 @@ module Hemingway
         Build.tag(attribute, content, :id => id, :class => klass, :href => href).should == "<#{attribute} id='#{id}' class='#{klass}' href='#{href}'>#{content}</#{attribute}>"
       end
 
+      it 'should generate a tag with content and a src and no closing tag' do
+        Build.tag("img", nil, :src => "/assets/vibes.png", :close_tag => false).should == "<img src='/assets/vibes.png'>"
+      end
+
       # Can't wait for Ruby 2.0
       it 'should generate a tag with content and a class and no content' do
         Build.tag(attribute, nil, :class => klass).should == "<#{attribute} class='#{klass}'></#{attribute}>"
