@@ -408,8 +408,20 @@ module Hemingway
                                                                             r0 = r35
                                                                             r0.extend(SymbolNode)
                                                                           else
-                                                                            @index = i0
-                                                                            r0 = nil
+                                                                            if has_terminal?("\\rightarrow", false, index)
+                                                                              r36 = instantiate_node(SyntaxNode,input, index...(index + 11))
+                                                                              @index += 11
+                                                                            else
+                                                                              terminal_parse_failure("\\rightarrow")
+                                                                              r36 = nil
+                                                                            end
+                                                                            if r36
+                                                                              r0 = r36
+                                                                              r0.extend(SymbolNode)
+                                                                            else
+                                                                              @index = i0
+                                                                              r0 = nil
+                                                                            end
                                                                           end
                                                                         end
                                                                       end
