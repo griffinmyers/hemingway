@@ -91,6 +91,12 @@ module Hemingway
     end
 
     module Paragraph0
+      def newline
+        elements[1]
+      end
+    end
+
+    module Paragraph1
       def sequence
         elements[0]
       end
@@ -123,8 +129,33 @@ module Hemingway
           if r4
             r2 = r4
           else
-            @index = i2
-            r2 = nil
+            i5, s5 = index, []
+            i6 = index
+            r7 = _nt_eop
+            if r7
+              r6 = nil
+            else
+              @index = i6
+              r6 = instantiate_node(SyntaxNode,input, index...index)
+            end
+            s5 << r6
+            if r6
+              r8 = _nt_newline
+              s5 << r8
+            end
+            if s5.last
+              r5 = instantiate_node(SyntaxNode,input, i5...index, s5)
+              r5.extend(Paragraph0)
+            else
+              @index = i5
+              r5 = nil
+            end
+            if r5
+              r2 = r5
+            else
+              @index = i2
+              r2 = nil
+            end
           end
         end
         if r2
@@ -136,12 +167,12 @@ module Hemingway
       r1 = instantiate_node(SyntaxNode,input, i1...index, s1)
       s0 << r1
       if r1
-        r5 = _nt_eop
-        s0 << r5
+        r9 = _nt_eop
+        s0 << r9
       end
       if s0.last
         r0 = instantiate_node(ParagraphNode,input, i0...index, s0)
-        r0.extend(Paragraph0)
+        r0.extend(Paragraph1)
       else
         @index = i0
         r0 = nil
@@ -153,6 +184,12 @@ module Hemingway
     end
 
     module LastParagraph0
+      def newline
+        elements[1]
+      end
+    end
+
+    module LastParagraph1
       def sequence
         elements[0]
       end
@@ -182,8 +219,33 @@ module Hemingway
           if r4
             r2 = r4
           else
-            @index = i2
-            r2 = nil
+            i5, s5 = index, []
+            i6 = index
+            r7 = _nt_eop
+            if r7
+              r6 = nil
+            else
+              @index = i6
+              r6 = instantiate_node(SyntaxNode,input, index...index)
+            end
+            s5 << r6
+            if r6
+              r8 = _nt_newline
+              s5 << r8
+            end
+            if s5.last
+              r5 = instantiate_node(SyntaxNode,input, i5...index, s5)
+              r5.extend(LastParagraph0)
+            else
+              @index = i5
+              r5 = nil
+            end
+            if r5
+              r2 = r5
+            else
+              @index = i2
+              r2 = nil
+            end
           end
         end
         if r2
@@ -200,17 +262,17 @@ module Hemingway
       end
       s0 << r1
       if r1
-        r6 = _nt_eop
-        if r6
-          r5 = r6
+        r10 = _nt_eop
+        if r10
+          r9 = r10
         else
-          r5 = instantiate_node(SyntaxNode,input, index...index)
+          r9 = instantiate_node(SyntaxNode,input, index...index)
         end
-        s0 << r5
+        s0 << r9
       end
       if s0.last
         r0 = instantiate_node(ParagraphNode,input, i0...index, s0)
-        r0.extend(LastParagraph0)
+        r0.extend(LastParagraph1)
       else
         @index = i0
         r0 = nil
@@ -388,7 +450,7 @@ module Hemingway
       end
 
       if has_terminal?("\n", false, index)
-        r0 = instantiate_node(SyntaxNode,input, index...(index + 1))
+        r0 = instantiate_node(NewlineNode,input, index...(index + 1))
         @index += 1
       else
         terminal_parse_failure("\n")

@@ -1,3 +1,5 @@
+require 'pry'
+
 module Hemingway
 
   module EntryNode
@@ -22,6 +24,8 @@ module Hemingway
         if element.respond_to?(:footnote_html)
           footnote_seed += 1
           element.html(footnote_seed)
+        elsif element.respond_to?(:newline)
+          element.newline.html
         else
           element.html
         end
@@ -40,6 +44,11 @@ module Hemingway
         end
       end
     end
-
   end
+
+  module NewlineNode
+    def html
+    end
+  end
+
 end

@@ -34,7 +34,7 @@ module Hemingway
     #   have to dig past to get at the list. elements[0] refers to the array of
     #   tags or texts here.
     rule paragraph
-      sequence:( content / footnote )* eop <ParagraphNode>
+      sequence:( content / footnote / !eop newline )* eop <ParagraphNode>
     end
 
     # The last paragraph in an entry need not end with \n\n. Because this
@@ -43,7 +43,7 @@ module Hemingway
     # to consume. The only time I can imagine this happening would be at
     # the end of an entry.
     rule last_paragraph
-      sequence:( content / footnote )+ eop? <ParagraphNode>
+      sequence:( content / footnote / !eop newline )+ eop? <ParagraphNode>
     end
 
     # Example: \tag{text} or just text or $\Delta$
@@ -74,7 +74,7 @@ module Hemingway
     end
 
     rule newline
-      "\n"
+      "\n" <NewlineNode>
     end
 
   end
