@@ -14,13 +14,12 @@ module Hemingway
         @parser.parse("\\begin{itemize} \\item hey \\end{description}").should be_nil
       end
 
-       it "should allow me to put blocks right after text and a newline" do
+      it "should allow me to put blocks right after text and a newline" do
         html = @parser.parse("check out this f*ckin block:\n\\begin{itemize} \\item hey \\end{itemize}").html
         html.should == "<div class='entry'><p>check out this f*ckin block:<ul><li>hey </li></ul></p></div>"
       end
 
     end
-
   end
 end
 
