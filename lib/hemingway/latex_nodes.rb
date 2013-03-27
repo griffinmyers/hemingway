@@ -1,5 +1,3 @@
-require 'pry'
-
 module Hemingway
 
   module EntryNode
