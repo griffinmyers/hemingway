@@ -58,7 +58,8 @@ module Hemingway
         "\\phi" =>  "&phi;",
         "\\chi" =>  "&chi;",
         "\\psi" =>  "&psi;",
-        "\\omega" =>  "&omega;"
+        "\\omega" =>  "&omega;",
+        "\\rightarrow" => "&rArr;"
       }
     end
 
