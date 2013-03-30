@@ -24,6 +24,11 @@ module Hemingway
         html.should == "<div class='entry'><p>hello &Delta;</p></div>"
       end
 
+      it 'should allow me to exponentiate text' do
+        html = @parser.parse("December 7$^{th}$").html
+        html.should == "<div class='entry'><p>December 7<sup>th</sup></p></div>"
+      end
+
     end
 
   end

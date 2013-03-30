@@ -16,7 +16,7 @@ module Hemingway
         elements[0]
       end
 
-      def symbol
+      def content
         elements[1]
       end
 
@@ -40,11 +40,23 @@ module Hemingway
       r1 = _nt_math_start
       s0 << r1
       if r1
-        r2 = _nt_symbol
+        i2 = index
+        r3 = _nt_symbol
+        if r3
+          r2 = r3
+        else
+          r4 = _nt_exponent
+          if r4
+            r2 = r4
+          else
+            @index = i2
+            r2 = nil
+          end
+        end
         s0 << r2
         if r2
-          r3 = _nt_math_end
-          s0 << r3
+          r5 = _nt_math_end
+          s0 << r5
         end
       end
       if s0.last
@@ -74,6 +86,60 @@ module Hemingway
       r0 = _nt_math_symbol
 
       node_cache[:symbol][start_index] = r0
+
+      r0
+    end
+
+    module Exponent0
+      def text
+        elements[1]
+      end
+
+    end
+
+    def _nt_exponent
+      start_index = index
+      if node_cache[:exponent].has_key?(index)
+        cached = node_cache[:exponent][index]
+        if cached
+          cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
+          @index = cached.interval.end
+        end
+        return cached
+      end
+
+      i0, s0 = index, []
+      if has_terminal?("^{", false, index)
+        r1 = instantiate_node(SyntaxNode,input, index...(index + 2))
+        @index += 2
+      else
+        terminal_parse_failure("^{")
+        r1 = nil
+      end
+      s0 << r1
+      if r1
+        r2 = _nt_text
+        s0 << r2
+        if r2
+          if has_terminal?("}", false, index)
+            r3 = instantiate_node(SyntaxNode,input, index...(index + 1))
+            @index += 1
+          else
+            terminal_parse_failure("}")
+            r3 = nil
+          end
+          s0 << r3
+        end
+      end
+      if s0.last
+        r0 = instantiate_node(ExponentNode,input, i0...index, s0)
+        r0.extend(Exponent0)
+      else
+        @index = i0
+        r0 = nil
+      end
+
+      node_cache[:exponent][start_index] = r0
 
       r0
     end
