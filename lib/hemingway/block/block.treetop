@@ -18,9 +18,9 @@ module Hemingway
     #   \end{itemize}
     rule block
       (
-        block_start type:list_type "}" whitespace content:list whitespace block_end list_type "}" &{ |seq| seq[1].text_value == seq[7].text_value } /
-        block_start type:verbatim_type "}" whitespace content:verbatim whitespace block_end verbatim_type "}" /
-        block_start type:quote_type "}" whitespace content:quote_entry whitespace block_end quote_type "}"
+        block_start type:list_type "}" whitespace? content:list whitespace? block_end list_type "}" &{ |seq| seq[1].text_value == seq[7].text_value } /
+        block_start type:verbatim_type "}" whitespace? content:verbatim whitespace? block_end verbatim_type "}" /
+        block_start type:quote_type "}" whitespace? content:quote_entry whitespace? block_end quote_type "}"
       ) <BlockNode>
     end
 

@@ -17,7 +17,7 @@ module Hemingway
       end
 
       rule item
-       "\\item" whitespace label:label? sequence:content* whitespace <ItemNode>
+       "\\item" whitespace? label:label? sequence:( content / whitespace )* <ItemNode>
       end
 
       rule label

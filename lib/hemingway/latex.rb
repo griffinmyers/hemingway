@@ -366,7 +366,12 @@ module Hemingway
           break
         end
       end
-      r0 = instantiate_node(SyntaxNode,input, i0...index, s0)
+      if s0.empty?
+        @index = i0
+        r0 = nil
+      else
+        r0 = instantiate_node(WhitespaceNode,input, i0...index, s0)
+      end
 
       node_cache[:whitespace][start_index] = r0
 

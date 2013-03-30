@@ -49,4 +49,9 @@ module Hemingway
     end
   end
 
+  module WhitespaceNode
+    def html
+    end
+  end
+
 end

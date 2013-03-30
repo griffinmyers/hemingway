@@ -98,20 +98,12 @@ module Hemingway
       end
 
       module Item0
-        def whitespace1
-          elements[1]
-        end
-
         def label
           elements[2]
         end
 
         def sequence
           elements[3]
-        end
-
-        def whitespace2
-          elements[4]
         end
       end
 
@@ -136,32 +128,45 @@ module Hemingway
         end
         s0 << r1
         if r1
-          r2 = _nt_whitespace
+          r3 = _nt_whitespace
+          if r3
+            r2 = r3
+          else
+            r2 = instantiate_node(SyntaxNode,input, index...index)
+          end
           s0 << r2
           if r2
-            r4 = _nt_label
-            if r4
-              r3 = r4
+            r5 = _nt_label
+            if r5
+              r4 = r5
             else
-              r3 = instantiate_node(SyntaxNode,input, index...index)
+              r4 = instantiate_node(SyntaxNode,input, index...index)
             end
-            s0 << r3
-            if r3
-              s5, i5 = [], index
+            s0 << r4
+            if r4
+              s6, i6 = [], index
               loop do
-                r6 = _nt_content
-                if r6
-                  s5 << r6
+                i7 = index
+                r8 = _nt_content
+                if r8
+                  r7 = r8
+                else
+                  r9 = _nt_whitespace
+                  if r9
+                    r7 = r9
+                  else
+                    @index = i7
+                    r7 = nil
+                  end
+                end
+                if r7
+                  s6 << r7
                 else
                   break
                 end
               end
-              r5 = instantiate_node(SyntaxNode,input, i5...index, s5)
-              s0 << r5
-              if r5
-                r7 = _nt_whitespace
-                s0 << r7
-              end
+              r6 = instantiate_node(SyntaxNode,input, i6...index, s6)
+              s0 << r6
             end
           end
         end

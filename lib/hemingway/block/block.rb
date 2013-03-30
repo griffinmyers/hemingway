@@ -29,16 +29,8 @@ module Hemingway
         elements[1]
       end
 
-      def whitespace1
-        elements[3]
-      end
-
       def content
         elements[4]
-      end
-
-      def whitespace2
-        elements[5]
       end
 
       def block_end
@@ -60,16 +52,8 @@ module Hemingway
         elements[1]
       end
 
-      def whitespace1
-        elements[3]
-      end
-
       def content
         elements[4]
-      end
-
-      def whitespace2
-        elements[5]
       end
 
       def block_end
@@ -91,16 +75,8 @@ module Hemingway
         elements[1]
       end
 
-      def whitespace1
-        elements[3]
-      end
-
       def content
         elements[4]
-      end
-
-      def whitespace2
-        elements[5]
       end
 
       def block_end
@@ -141,39 +117,49 @@ module Hemingway
           end
           s1 << r4
           if r4
-            r5 = _nt_whitespace
+            r6 = _nt_whitespace
+            if r6
+              r5 = r6
+            else
+              r5 = instantiate_node(SyntaxNode,input, index...index)
+            end
             s1 << r5
             if r5
-              r6 = _nt_list
-              s1 << r6
-              if r6
-                r7 = _nt_whitespace
-                s1 << r7
-                if r7
-                  r8 = _nt_block_end
-                  s1 << r8
-                  if r8
-                    r9 = _nt_list_type
-                    s1 << r9
-                    if r9
+              r7 = _nt_list
+              s1 << r7
+              if r7
+                r9 = _nt_whitespace
+                if r9
+                  r8 = r9
+                else
+                  r8 = instantiate_node(SyntaxNode,input, index...index)
+                end
+                s1 << r8
+                if r8
+                  r10 = _nt_block_end
+                  s1 << r10
+                  if r10
+                    r11 = _nt_list_type
+                    s1 << r11
+                    if r11
                       if has_terminal?("}", false, index)
-                        r10 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                        r12 = instantiate_node(SyntaxNode,input, index...(index + 1))
                         @index += 1
                       else
                         terminal_parse_failure("}")
-                        r10 = nil
+                        r12 = nil
                       end
-                      s1 << r10
-                      if r10
-                        i11 = index
-                        r12 = lambda { |seq| seq[1].text_value == seq[7].text_value }.call(s1)
-                        if r12
-                          @index = i11
-                          r11 = instantiate_node(SyntaxNode,input, index...index)
+                      s1 << r12
+                      if r12
+                        i13 = index
+                        r14 = lambda { |seq| seq[1].text_value == seq[7].text_value }.call(s1)
+                        if r14
+                          @index = i13
+                          r13 = instantiate_node(SyntaxNode,input, index...index)
                         else
-                          r11 = nil
+                          r13 = nil
                         end
-                        s1 << r11
+                        s1 << r13
                       end
                     end
                   end
@@ -194,45 +180,55 @@ module Hemingway
         r0 = r1
         r0.extend(BlockNode)
       else
-        i13, s13 = index, []
-        r14 = _nt_block_start
-        s13 << r14
-        if r14
-          r15 = _nt_verbatim_type
-          s13 << r15
-          if r15
+        i15, s15 = index, []
+        r16 = _nt_block_start
+        s15 << r16
+        if r16
+          r17 = _nt_verbatim_type
+          s15 << r17
+          if r17
             if has_terminal?("}", false, index)
-              r16 = instantiate_node(SyntaxNode,input, index...(index + 1))
+              r18 = instantiate_node(SyntaxNode,input, index...(index + 1))
               @index += 1
             else
               terminal_parse_failure("}")
-              r16 = nil
+              r18 = nil
             end
-            s13 << r16
-            if r16
-              r17 = _nt_whitespace
-              s13 << r17
-              if r17
-                r18 = _nt_verbatim
-                s13 << r18
-                if r18
-                  r19 = _nt_whitespace
-                  s13 << r19
-                  if r19
-                    r20 = _nt_block_end
-                    s13 << r20
-                    if r20
-                      r21 = _nt_verbatim_type
-                      s13 << r21
-                      if r21
+            s15 << r18
+            if r18
+              r20 = _nt_whitespace
+              if r20
+                r19 = r20
+              else
+                r19 = instantiate_node(SyntaxNode,input, index...index)
+              end
+              s15 << r19
+              if r19
+                r21 = _nt_verbatim
+                s15 << r21
+                if r21
+                  r23 = _nt_whitespace
+                  if r23
+                    r22 = r23
+                  else
+                    r22 = instantiate_node(SyntaxNode,input, index...index)
+                  end
+                  s15 << r22
+                  if r22
+                    r24 = _nt_block_end
+                    s15 << r24
+                    if r24
+                      r25 = _nt_verbatim_type
+                      s15 << r25
+                      if r25
                         if has_terminal?("}", false, index)
-                          r22 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                          r26 = instantiate_node(SyntaxNode,input, index...(index + 1))
                           @index += 1
                         else
                           terminal_parse_failure("}")
-                          r22 = nil
+                          r26 = nil
                         end
-                        s13 << r22
+                        s15 << r26
                       end
                     end
                   end
@@ -241,56 +237,66 @@ module Hemingway
             end
           end
         end
-        if s13.last
-          r13 = instantiate_node(SyntaxNode,input, i13...index, s13)
-          r13.extend(Block1)
+        if s15.last
+          r15 = instantiate_node(SyntaxNode,input, i15...index, s15)
+          r15.extend(Block1)
         else
-          @index = i13
-          r13 = nil
+          @index = i15
+          r15 = nil
         end
-        if r13
-          r0 = r13
+        if r15
+          r0 = r15
           r0.extend(BlockNode)
         else
-          i23, s23 = index, []
-          r24 = _nt_block_start
-          s23 << r24
-          if r24
-            r25 = _nt_quote_type
-            s23 << r25
-            if r25
+          i27, s27 = index, []
+          r28 = _nt_block_start
+          s27 << r28
+          if r28
+            r29 = _nt_quote_type
+            s27 << r29
+            if r29
               if has_terminal?("}", false, index)
-                r26 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                r30 = instantiate_node(SyntaxNode,input, index...(index + 1))
                 @index += 1
               else
                 terminal_parse_failure("}")
-                r26 = nil
+                r30 = nil
               end
-              s23 << r26
-              if r26
-                r27 = _nt_whitespace
-                s23 << r27
-                if r27
-                  r28 = _nt_quote_entry
-                  s23 << r28
-                  if r28
-                    r29 = _nt_whitespace
-                    s23 << r29
-                    if r29
-                      r30 = _nt_block_end
-                      s23 << r30
-                      if r30
-                        r31 = _nt_quote_type
-                        s23 << r31
-                        if r31
+              s27 << r30
+              if r30
+                r32 = _nt_whitespace
+                if r32
+                  r31 = r32
+                else
+                  r31 = instantiate_node(SyntaxNode,input, index...index)
+                end
+                s27 << r31
+                if r31
+                  r33 = _nt_quote_entry
+                  s27 << r33
+                  if r33
+                    r35 = _nt_whitespace
+                    if r35
+                      r34 = r35
+                    else
+                      r34 = instantiate_node(SyntaxNode,input, index...index)
+                    end
+                    s27 << r34
+                    if r34
+                      r36 = _nt_block_end
+                      s27 << r36
+                      if r36
+                        r37 = _nt_quote_type
+                        s27 << r37
+                        if r37
                           if has_terminal?("}", false, index)
-                            r32 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                            r38 = instantiate_node(SyntaxNode,input, index...(index + 1))
                             @index += 1
                           else
                             terminal_parse_failure("}")
-                            r32 = nil
+                            r38 = nil
                           end
-                          s23 << r32
+                          s27 << r38
                         end
                       end
                     end
@@ -299,15 +305,15 @@ module Hemingway
               end
             end
           end
-          if s23.last
-            r23 = instantiate_node(SyntaxNode,input, i23...index, s23)
-            r23.extend(Block2)
+          if s27.last
+            r27 = instantiate_node(SyntaxNode,input, i27...index, s27)
+            r27.extend(Block2)
           else
-            @index = i23
-            r23 = nil
+            @index = i27
+            r27 = nil
           end
-          if r23
-            r0 = r23
+          if r27
+            r0 = r27
             r0.extend(BlockNode)
           else
             @index = i0

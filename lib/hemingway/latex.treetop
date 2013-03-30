@@ -58,7 +58,7 @@ module Hemingway
 
     # Treetop does not separate lexing from parsing. Must consume all input.
     rule whitespace
-      ( " " / newline )*
+      ( " " / newline )+ <WhitespaceNode>
     end
 
     rule spaces

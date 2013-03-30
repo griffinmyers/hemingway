@@ -60,6 +60,11 @@ module Hemingway
         html.should == "<div class='entry'><p><ul><li><ul><li><ul><li>hey </li></ul> </li></ul> </li></ul></p></div>"
       end
 
+      it 'allows me to created a nested list without specfying another item' do
+        html = @parser.parse("\\begin{itemize} \n \\item thing 1 \n \\begin{itemize} \n \\item 2 \n \\end{itemize} \n  \\end{itemize}").html
+        html.should == "<div class='entry'><p><ul><li>thing 1 <ul><li>2 </li></ul> </li></ul></p></div>"
+      end
+
     end
 
     describe "#enumerate" do
