@@ -64,6 +64,19 @@ module Hemingway
 
     end
 
+    describe "#accent" do
+
+      it 'should convert an accent and character into the html equivalent' do
+        Build.accent("A", "`").should == "&Agrave;"
+      end
+
+      it 'should leave the character untouched if no equiavalent exists' do
+        Build.accent("G", "`").should == "G"
+        Build.accent("C", "~").should == "C"
+      end
+
+    end
+
   end
 
 end

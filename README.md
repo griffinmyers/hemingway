@@ -292,6 +292,12 @@ The love, <span class="pull-right">Will</span>
 \\neatline : <hr class='neatline'>
 ```
 
+###### Accents
+
+```html
+Charm\'{e}e de vous voir. Je suis tr\`{e} contente de vous voir. : Charm&eacute;e de vous voir. Je suis tr&egrave; contente de vous voir.
+```
+
 ## Contributing
 
 1. Fork it

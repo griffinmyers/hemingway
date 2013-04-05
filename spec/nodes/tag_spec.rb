@@ -93,6 +93,15 @@ module Hemingway
 
     end
 
+    describe "#accents" do
+
+      it 'allows me to put accents inline with text' do
+        html = @parser.parse("Charm\\'{e}e de vous voir. Je suis tr\\`{e} contente de vous voir.").html
+        html.should == "<div class='entry'><p>Charm&eacute;e de vous voir. Je suis tr&egrave; contente de vous voir.</p></div>"
+      end
+
+    end
+
   end
 
 end

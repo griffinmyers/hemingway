@@ -21,6 +21,11 @@ module Hemingway
       latex_sym_to_html[symbol]
     end
 
+    # return the accented character or just the character if no match.
+    def self.accent(character, accent)
+      character_accent_to_html[character] and character_accent_to_html[character][accent] or character
+    end
+
     private
     def self.latex_sym_to_html
       {
@@ -60,6 +65,96 @@ module Hemingway
         "\\psi" =>  "&psi;",
         "\\omega" =>  "&omega;",
         "\\rightarrow" => "&rArr;"
+      }
+    end
+
+    def self.character_accent_to_html
+      {
+        "A" => {
+          "`" => "&Agrave;",
+          "'" => "&Aacute;",
+          "c" => "&Acirc;",
+          "~" => "&Atilde;",
+          '"' => "&Auml;",
+          "r" => "&Aring;"
+        },
+        "C" => {
+          "c" => "&Ccedil;"
+        },
+        "E" => {
+          "`" => "&Egrave;",
+          "'" => "&Eacute;",
+          "c" => "&Ecirc;",
+          '"' => "&Euml;"
+        },
+        "I" => {
+          "`" => "&Igrave;",
+          "'" => "&Iacute;",
+          "c" => "&Icirc;",
+          '"' => "&Iuml;"
+        },
+        "N" => {
+          "~" => "&Ntilde;"
+        },
+        "O" => {
+          "`" => "&Ograve;",
+          "'" => "&Oacute;",
+          "c" => "&Ocirc;",
+          "~" => "&Otilde;",
+          '"' => "&Ouml;"
+        },
+        "U" => {
+          "`" => "&Ugrave;",
+          "'" => "&Uacute;",
+          "c" => "&Ucirc;",
+          '"' => "&Uuml;"
+        },
+        "Y" => {
+          "'" => "&Yacute;"
+        },
+        "a" => {
+          "`" => "&agrave;",
+          "'" => "&aacute;",
+          "c" => "&acirc;",
+          "~" => "&atilde;",
+          '"' => "&auml;",
+          "r" => "&aring;"
+        },
+        "c" => {
+          "c" => "&ccedil;"
+        },
+        "e" => {
+          "`" => "&egrave;",
+          "'" => "&eacute;",
+          "c" => "&ecirc;",
+          '"' => "&euml;"
+        },
+        "i" => {
+          "`" => "&igrave;",
+          "'" => "&iacute;",
+          "c" => "&icirc;",
+          '"' => "&iuml;"
+        },
+        "n" => {
+          "~" => "&ntilde;"
+        },
+        "o" => {
+          "`" => "&ograve;",
+          "'" => "&oacute;",
+          "c" => "&ocirc;",
+          "~" => "&otilde;",
+          '"' => "&ouml;"
+        },
+        "u" => {
+          "`" => "&ugrave;",
+          "'" => "&uacute;",
+          "c" => "&ucirc;",
+          '"' => "&uuml;"
+        },
+        "y" => {
+          "'" => "&yacute;",
+          '"' => "&yuml;"
+        }
       }
     end
 

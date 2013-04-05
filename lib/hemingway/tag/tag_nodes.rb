@@ -46,4 +46,10 @@ module Hemingway
       Build.tag("span", content, :class => "textsc")
     end
   end
+
+  module AccentNode
+    def html
+      Build.accent(character.text_value, accent.text_value)
+    end
+  end
 end

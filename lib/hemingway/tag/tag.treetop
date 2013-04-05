@@ -11,6 +11,8 @@ module Hemingway
       tag_start hfill spaces sequence:( !newline content )* <HFillNode>
       /
       tag_start neatline <NeatLineNode>
+      /
+      tag_start accent "{" character:. "}" <AccentNode>
     end
 
     # All tag types will be responsible with implementing their own
@@ -49,6 +51,10 @@ module Hemingway
 
     rule neatline
       "neatline"
+    end
+
+    rule accent
+      '`' / "'" / '^' / '"' / "c" / "~" / "r"
     end
 
     rule tag_start

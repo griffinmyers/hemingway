@@ -75,6 +75,21 @@ module Hemingway
       end
     end
 
+    module Tag5
+      def tag_start
+        elements[0]
+      end
+
+      def accent
+        elements[1]
+      end
+
+      def character
+        elements[3]
+      end
+
+    end
+
     def _nt_tag
       start_index = index
       if node_cache[:tag].has_key?(index)
@@ -249,8 +264,56 @@ module Hemingway
             if r23
               r0 = r23
             else
-              @index = i0
-              r0 = nil
+              i26, s26 = index, []
+              r27 = _nt_tag_start
+              s26 << r27
+              if r27
+                r28 = _nt_accent
+                s26 << r28
+                if r28
+                  if has_terminal?("{", false, index)
+                    r29 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                    @index += 1
+                  else
+                    terminal_parse_failure("{")
+                    r29 = nil
+                  end
+                  s26 << r29
+                  if r29
+                    if index < input_length
+                      r30 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                      @index += 1
+                    else
+                      terminal_parse_failure("any character")
+                      r30 = nil
+                    end
+                    s26 << r30
+                    if r30
+                      if has_terminal?("}", false, index)
+                        r31 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                        @index += 1
+                      else
+                        terminal_parse_failure("}")
+                        r31 = nil
+                      end
+                      s26 << r31
+                    end
+                  end
+                end
+              end
+              if s26.last
+                r26 = instantiate_node(AccentNode,input, i26...index, s26)
+                r26.extend(Tag5)
+              else
+                @index = i26
+                r26 = nil
+              end
+              if r26
+                r0 = r26
+              else
+                @index = i0
+                r0 = nil
+              end
             end
           end
         end
@@ -477,6 +540,103 @@ module Hemingway
       end
 
       node_cache[:neatline][start_index] = r0
+
+      r0
+    end
+
+    def _nt_accent
+      start_index = index
+      if node_cache[:accent].has_key?(index)
+        cached = node_cache[:accent][index]
+        if cached
+          cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
+          @index = cached.interval.end
+        end
+        return cached
+      end
+
+      i0 = index
+      if has_terminal?('`', false, index)
+        r1 = instantiate_node(SyntaxNode,input, index...(index + 1))
+        @index += 1
+      else
+        terminal_parse_failure('`')
+        r1 = nil
+      end
+      if r1
+        r0 = r1
+      else
+        if has_terminal?("'", false, index)
+          r2 = instantiate_node(SyntaxNode,input, index...(index + 1))
+          @index += 1
+        else
+          terminal_parse_failure("'")
+          r2 = nil
+        end
+        if r2
+          r0 = r2
+        else
+          if has_terminal?('^', false, index)
+            r3 = instantiate_node(SyntaxNode,input, index...(index + 1))
+            @index += 1
+          else
+            terminal_parse_failure('^')
+            r3 = nil
+          end
+          if r3
+            r0 = r3
+          else
+            if has_terminal?('"', false, index)
+              r4 = instantiate_node(SyntaxNode,input, index...(index + 1))
+              @index += 1
+            else
+              terminal_parse_failure('"')
+              r4 = nil
+            end
+            if r4
+              r0 = r4
+            else
+              if has_terminal?("c", false, index)
+                r5 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                @index += 1
+              else
+                terminal_parse_failure("c")
+                r5 = nil
+              end
+              if r5
+                r0 = r5
+              else
+                if has_terminal?("~", false, index)
+                  r6 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                  @index += 1
+                else
+                  terminal_parse_failure("~")
+                  r6 = nil
+                end
+                if r6
+                  r0 = r6
+                else
+                  if has_terminal?("r", false, index)
+                    r7 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                    @index += 1
+                  else
+                    terminal_parse_failure("r")
+                    r7 = nil
+                  end
+                  if r7
+                    r0 = r7
+                  else
+                    @index = i0
+                    r0 = nil
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+
+      node_cache[:accent][start_index] = r0
 
       r0
     end
