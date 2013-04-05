@@ -1,5 +1,5 @@
 module Hemingway
-
+require 'pry'
   module MathNode
     def html
       content.html
@@ -8,8 +8,14 @@ module Hemingway
 
   module ExponentNode
   	def html
-  		Build.tag("sup", text.html)
-  	end
-	end
+      # Pretty bad hack, but I figure it ain't a big deal until I want to
+      # support more rebust syntax.
+      if value.text_value == "\\circ"
+        "&deg;"
+      else
+        Build.tag("sup", value.html)
+      end
+    end
+  end
 
 end

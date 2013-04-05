@@ -91,7 +91,7 @@ module Hemingway
     end
 
     module Exponent0
-      def text
+      def value
         elements[1]
       end
 
@@ -118,17 +118,35 @@ module Hemingway
       end
       s0 << r1
       if r1
-        r2 = _nt_text
+        i2 = index
+        if has_terminal?("\\circ", false, index)
+          r3 = instantiate_node(SyntaxNode,input, index...(index + 5))
+          @index += 5
+        else
+          terminal_parse_failure("\\circ")
+          r3 = nil
+        end
+        if r3
+          r2 = r3
+        else
+          r4 = _nt_text
+          if r4
+            r2 = r4
+          else
+            @index = i2
+            r2 = nil
+          end
+        end
         s0 << r2
         if r2
           if has_terminal?("}", false, index)
-            r3 = instantiate_node(SyntaxNode,input, index...(index + 1))
+            r5 = instantiate_node(SyntaxNode,input, index...(index + 1))
             @index += 1
           else
             terminal_parse_failure("}")
-            r3 = nil
+            r5 = nil
           end
-          s0 << r3
+          s0 << r5
         end
       end
       if s0.last

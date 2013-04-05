@@ -29,6 +29,11 @@ module Hemingway
         html.should == "<div class='entry'><p>December 7<sup>th</sup></p></div>"
       end
 
+      it 'should allow me to make a degree sign' do
+        html = @parser.parse("25 $^{\\circ}$ celcius").html
+        html.should == "<div class='entry'><p>25 &deg; celcius</p></div>"
+      end
+
     end
 
   end
