@@ -6,7 +6,7 @@ module Hemingway
     # Special characters that need to be escaped in Latex.
     # Example: War \& Peace
     rule special
-      escape character:( "#" / "$" / "%" / "&" / "_" / "{" / "}" ) <SpecialNode>
+      escape character:( "#" / "$" / "%" / "&" / "_" / "{" / "}" / "textbackslash{}" ) <SpecialNode>
     end
 
     rule escape

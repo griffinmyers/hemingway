@@ -107,8 +107,19 @@ module Hemingway
                     if r9
                       r2 = r9
                     else
-                      @index = i2
-                      r2 = nil
+                      if has_terminal?("textbackslash{}", false, index)
+                        r10 = instantiate_node(SyntaxNode,input, index...(index + 15))
+                        @index += 15
+                      else
+                        terminal_parse_failure("textbackslash{}")
+                        r10 = nil
+                      end
+                      if r10
+                        r2 = r10
+                      else
+                        @index = i2
+                        r2 = nil
+                      end
                     end
                   end
                 end
