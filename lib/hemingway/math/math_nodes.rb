@@ -1,5 +1,4 @@
 module Hemingway
-require 'pry'
   module MathNode
     def html
       content.html

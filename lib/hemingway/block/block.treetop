@@ -2,6 +2,7 @@ require "hemingway/block/block_nodes"
 require "hemingway/block/list/list"
 require "hemingway/block/verbatim/verbatim"
 require "hemingway/block/quote/quote"
+require "hemingway/block/center/center"
 
 module Hemingway
   grammar Block
@@ -9,6 +10,7 @@ module Hemingway
     include List
     include Verbatim
     include Quote
+    include Center
 
     # Example:
     #   \begin{itemize}
@@ -20,7 +22,8 @@ module Hemingway
       (
         block_start type:list_type "}" whitespace? content:list whitespace? block_end list_type "}" &{ |seq| seq[1].text_value == seq[7].text_value } /
         block_start type:verbatim_type "}" whitespace? content:verbatim whitespace? block_end verbatim_type "}" /
-        block_start type:quote_type "}" whitespace? content:quote_entry whitespace? block_end quote_type "}"
+        block_start type:quote_type "}" whitespace? content:quote_entry whitespace? block_end quote_type "}" /
+        block_start type:center_type "}" whitespace? content:center whitespace? block_end center_type "}"
       ) <BlockNode>
     end
 

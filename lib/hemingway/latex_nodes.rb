@@ -47,6 +47,10 @@ module Hemingway
   module NewlineNode
     def html
     end
+
+    def visible_html
+      "\n"
+    end
   end
 
   module WhitespaceNode

@@ -1,0 +1,17 @@
+require "hemingway/block/center/center_nodes"
+
+module Hemingway
+  module Block
+    grammar Center
+
+      rule center
+        ( !( block_end center_type ) content / newline )*
+      end
+
+      rule center_type
+        "center" <CenterNode>
+      end
+
+    end
+  end
+end

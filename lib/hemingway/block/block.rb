@@ -5,6 +5,7 @@ require "hemingway/block/block_nodes"
 require "hemingway/block/list/list"
 require "hemingway/block/verbatim/verbatim"
 require "hemingway/block/quote/quote"
+require "hemingway/block/center/center"
 
 module Hemingway
   module Block
@@ -19,6 +20,8 @@ module Hemingway
     include Verbatim
 
     include Quote
+
+    include Center
 
     module Block0
       def block_start
@@ -84,6 +87,29 @@ module Hemingway
       end
 
       def quote_type
+        elements[7]
+      end
+
+    end
+
+    module Block3
+      def block_start
+        elements[0]
+      end
+
+      def type
+        elements[1]
+      end
+
+      def content
+        elements[4]
+      end
+
+      def block_end
+        elements[6]
+      end
+
+      def center_type
         elements[7]
       end
 
@@ -316,8 +342,77 @@ module Hemingway
             r0 = r27
             r0.extend(BlockNode)
           else
-            @index = i0
-            r0 = nil
+            i39, s39 = index, []
+            r40 = _nt_block_start
+            s39 << r40
+            if r40
+              r41 = _nt_center_type
+              s39 << r41
+              if r41
+                if has_terminal?("}", false, index)
+                  r42 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                  @index += 1
+                else
+                  terminal_parse_failure("}")
+                  r42 = nil
+                end
+                s39 << r42
+                if r42
+                  r44 = _nt_whitespace
+                  if r44
+                    r43 = r44
+                  else
+                    r43 = instantiate_node(SyntaxNode,input, index...index)
+                  end
+                  s39 << r43
+                  if r43
+                    r45 = _nt_center
+                    s39 << r45
+                    if r45
+                      r47 = _nt_whitespace
+                      if r47
+                        r46 = r47
+                      else
+                        r46 = instantiate_node(SyntaxNode,input, index...index)
+                      end
+                      s39 << r46
+                      if r46
+                        r48 = _nt_block_end
+                        s39 << r48
+                        if r48
+                          r49 = _nt_center_type
+                          s39 << r49
+                          if r49
+                            if has_terminal?("}", false, index)
+                              r50 = instantiate_node(SyntaxNode,input, index...(index + 1))
+                              @index += 1
+                            else
+                              terminal_parse_failure("}")
+                              r50 = nil
+                            end
+                            s39 << r50
+                          end
+                        end
+                      end
+                    end
+                  end
+                end
+              end
+            end
+            if s39.last
+              r39 = instantiate_node(SyntaxNode,input, i39...index, s39)
+              r39.extend(Block3)
+            else
+              @index = i39
+              r39 = nil
+            end
+            if r39
+              r0 = r39
+              r0.extend(BlockNode)
+            else
+              @index = i0
+              r0 = nil
+            end
           end
         end
       end

@@ -274,6 +274,12 @@ maps to
 </blockquote>
 ```
 
+###### Centering Text
+
+```html
+\\begin{center} Dromiceiomimus \\end{center} : <div class="center">Dromiceiomimus</div>
+```
+
 ###### Inline Right Justification
 
 ```html
