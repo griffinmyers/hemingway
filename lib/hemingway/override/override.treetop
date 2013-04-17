@@ -1,0 +1,16 @@
+require "hemingway/override/override_nodes"
+
+module Hemingway
+  grammar Override
+
+    # Plain text to be overridden with more appropriate characters
+    rule override
+      "---" <MDashNode>
+      /
+      "``" <LeftQuoteNode>
+      /
+      "''" <RightQuoteNode>
+    end
+
+  end
+end

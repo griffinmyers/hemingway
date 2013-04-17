@@ -100,8 +100,13 @@ module Hemingway
             if r4
               r0 = r4
             else
-              @index = i0
-              r0 = nil
+              r5 = _nt_override
+              if r5
+                r0 = r5
+              else
+                @index = i0
+                r0 = nil
+              end
             end
           end
         end

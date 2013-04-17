@@ -253,6 +253,9 @@ And looks like this:
 
 </div>
 
+I've added a timestamp onto footnote hrefs and ids to make the unique incase
+you are parsing multiple entries on a given HTML document.
+
 ###### Block Quotes
 
 Pretty standard. You can put anything in there except a footnote. That seemed
@@ -302,6 +305,16 @@ The love, <span class="pull-right">Will</span>
 
 ```html
 Charm\'{e}e de vous voir. Je suis tr\`{e} contente de vous voir. : Charm&eacute;e de vous voir. Je suis tr&egrave; contente de vous voir.
+```
+
+###### Overrides
+
+Some characters need a little help.
+
+```html
+--- : "&mdash;"
+`` : "&#8220;"
+'' : "&#8221;"
 ```
 
 ## Contributing

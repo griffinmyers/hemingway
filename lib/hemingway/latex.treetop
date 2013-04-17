@@ -3,6 +3,7 @@ require 'hemingway/latex_nodes'
 require "hemingway/block/block"
 require "hemingway/footnote/footnote"
 require "hemingway/math/math"
+require "hemingway/override/override"
 require "hemingway/special/special"
 require "hemingway/symbol/symbol"
 require "hemingway/tag/tag"
@@ -14,6 +15,7 @@ module Hemingway
     include Block
     include Footnote
     include Math
+    include Override
     include Special
     include Symbol
     include Tag
@@ -53,7 +55,7 @@ module Hemingway
     #  method need not be defined on it because alas, it already exists as
     #  defined in the text rule itself!
     rule content
-      special / tag / block / math / text
+      special / tag / block / math / override / text
     end
 
     # Treetop does not separate lexing from parsing. Must consume all input.

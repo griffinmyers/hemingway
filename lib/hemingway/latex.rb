@@ -6,6 +6,7 @@ require 'hemingway/latex_nodes'
 require "hemingway/block/block"
 require "hemingway/footnote/footnote"
 require "hemingway/math/math"
+require "hemingway/override/override"
 require "hemingway/special/special"
 require "hemingway/symbol/symbol"
 require "hemingway/tag/tag"
@@ -24,6 +25,8 @@ module Hemingway
     include Footnote
 
     include Math
+
+    include Override
 
     include Special
 
@@ -311,12 +314,17 @@ module Hemingway
             if r4
               r0 = r4
             else
-              r5 = _nt_text
+              r5 = _nt_override
               if r5
                 r0 = r5
               else
-                @index = i0
-                r0 = nil
+                r6 = _nt_text
+                if r6
+                  r0 = r6
+                else
+                  @index = i0
+                  r0 = nil
+                end
               end
             end
           end
