@@ -7,7 +7,7 @@ module Hemingway
 
       elements.each do |e|
         # Time.now.to_f => 123123.1231231
-        time = Time.now.to_f.to_s.gsub(".", ":")
+        time = Time.now.to_f.to_s.gsub(".", "-")
         paragraph_html += e.html(footnote_content.size, time)
         footnote_content += e.footnote_html(footnote_content.size, time)
       end
