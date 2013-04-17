@@ -1,4 +1,4 @@
-module Hemingway 
+module Hemingway
 
   module ItemizeListNode
     def html(block_content)
@@ -26,7 +26,7 @@ module Hemingway
 
     def description_html
       label_tag = label.empty? ? "" : Build.tag("dt", label.html)
-      Build.tag("dd", label_tag + sequence.elements.map { |e| e.html }.join)
+      label_tag + Build.tag("dd", sequence.elements.map { |e| e.html }.join)
     end
   end
 

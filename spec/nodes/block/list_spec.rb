@@ -87,7 +87,7 @@ module Hemingway
 
       it 'should wrap labels in the dictionary label tag' do
         html = @parser.parse("\\begin{description} \\item [Frodo] Adventuerer \\item [Sam] Faithful Companion \\end{description}").html
-        html.should == "<div class='entry'><p><dl><dd><dt>Frodo</dt> Adventuerer </dd><dd><dt>Sam</dt> Faithful Companion </dd></dl></p></div>"
+        html.should == "<div class='entry'><p><dl><dt>Frodo</dt><dd> Adventuerer </dd><dt>Sam</dt><dd> Faithful Companion </dd></dl></p></div>"
       end
     end
 
