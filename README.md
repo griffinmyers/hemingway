@@ -136,7 +136,7 @@ $\\omega$" : &omega;
 One can also exponentiate something by using math mode:
 
 ```html
-December 7$^{th}$ : <div class='entry'><p>December 7<sup>th</sup></p></div>
+December 7$^{th}$ : December 7<sup>th</sup>
 ```
 
 ###### Special Characters
