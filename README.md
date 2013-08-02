@@ -4,9 +4,7 @@ Hemingway can translate a very rigid subset of LaTeX commands into HTML markup t
 
 The parser was created using Treetop, so it might be useful to consult the [Treetop Documentation](http://treetop.rubyforge.org/syntactic_recognition.html) to learn more about the inner workings.
 
-Throughout you'll notice this character: `\\`. This is the string represntation of the `\` character.
-
-So if your latex is coming from a file you would just write `\emph{wookies}`, and if it were programatically coming from a string
+Throughout you'll notice this character: `\\`. This is the string representation of the `\` character, so if your latex is coming from a file you would just write `\emph{wookies}`, and if it were programatically coming from a string
 you would write `\\emph{wookies}`
 
 ## Installation
