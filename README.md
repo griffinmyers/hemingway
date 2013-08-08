@@ -315,6 +315,12 @@ Some characters need a little help.
 '' : "&#8221;"
 ```
 
+###### Links
+
+```html
+\\href{http://wookies.org}{Support the Movement} : <a href='http://wookies.org'>Support the Movement</a>
+```
+
 ## Contributing
 
 1. Fork it

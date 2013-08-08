@@ -1,0 +1,19 @@
+require "hemingway/link/link_nodes"
+
+module Hemingway
+  grammar Link
+
+    rule link
+      "\\href" spaces "{" url:link_text "}" spaces "{" description:link_text "}" <LinkNode>
+    end
+
+    rule link_text
+      ( !"}" . )*
+    end
+
+    rule spaces
+      ( " " )*
+    end
+
+  end
+end
