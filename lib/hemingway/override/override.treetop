@@ -7,9 +7,13 @@ module Hemingway
     rule override
       "---" <MDashNode>
       /
-      "``" <LeftQuoteNode>
+      "``" <LeftDoubleQuoteNode>
       /
-      "''" <RightQuoteNode>
+      "''" <RightDoubleQuoteNode>
+      /
+      "`" <LeftSingleQuoteNode>
+      /
+      "'" <RightSingleQuoteNode>
     end
 
   end

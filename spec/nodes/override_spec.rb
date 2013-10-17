@@ -15,6 +15,16 @@ module Hemingway
         html.should == "<div class='entry'><p>Please&mdash; wait for me.</p></div>"
       end
 
+      it 'should override a single quotes' do
+        html = @parser.parse("He made `onanistic' motions.").html
+        html.should == "<div class='entry'><p>He made &#8216;onanistic&#8217; motions.</p></div>"
+      end
+
+      it 'should override a double quotes' do
+        html = @parser.parse("He made ``onanistic'' motions.").html
+        html.should == "<div class='entry'><p>He made &#8220;onanistic&#8221; motions.</p></div>"
+      end
+
     end
 
   end

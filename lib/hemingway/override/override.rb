@@ -34,7 +34,7 @@ module Hemingway
         r0 = r1
       else
         if has_terminal?("``", false, index)
-          r2 = instantiate_node(LeftQuoteNode,input, index...(index + 2))
+          r2 = instantiate_node(LeftDoubleQuoteNode,input, index...(index + 2))
           @index += 2
         else
           terminal_parse_failure("``")
@@ -44,7 +44,7 @@ module Hemingway
           r0 = r2
         else
           if has_terminal?("''", false, index)
-            r3 = instantiate_node(RightQuoteNode,input, index...(index + 2))
+            r3 = instantiate_node(RightDoubleQuoteNode,input, index...(index + 2))
             @index += 2
           else
             terminal_parse_failure("''")
@@ -53,8 +53,30 @@ module Hemingway
           if r3
             r0 = r3
           else
-            @index = i0
-            r0 = nil
+            if has_terminal?("`", false, index)
+              r4 = instantiate_node(LeftSingleQuoteNode,input, index...(index + 1))
+              @index += 1
+            else
+              terminal_parse_failure("`")
+              r4 = nil
+            end
+            if r4
+              r0 = r4
+            else
+              if has_terminal?("'", false, index)
+                r5 = instantiate_node(RightSingleQuoteNode,input, index...(index + 1))
+                @index += 1
+              else
+                terminal_parse_failure("'")
+                r5 = nil
+              end
+              if r5
+                r0 = r5
+              else
+                @index = i0
+                r0 = nil
+              end
+            end
           end
         end
       end
